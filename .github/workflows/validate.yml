@@ -1,0 +1,39 @@
+name: Validate Seraphyx Staff Portal
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  validate:
+    name: Validate Project
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          test -f apps-script/Code.gs
+          test -f apps-script/Index.html
+          test -f apps-script/appsscript.json
+
+      - name: Validate Apps Script manifest
+        run: |
+          python -m json.tool apps-script/appsscript.json > /dev/null
+
+      - name: Check JavaScript/HTML files
+        run: |
+          test -s apps-script/Code.gs
+          test -s apps-script/Index.html
+
+      - name: Validation complete
+        run: echo "✅ Seraphyx Staff Portal validation passed!"

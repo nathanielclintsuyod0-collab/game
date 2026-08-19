@@ -1,0 +1,38 @@
+name: Deploy Seraphyx Staff Portal
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Google Apps Script
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Clasp
+        run: npm install -g @google/clasp
+
+      - name: Authenticate Clasp
+        env:
+          CLASPRC_JSON: ${{ secrets.CLASPRC_JSON }}
+        run: |
+          echo "$CLASPRC_JSON" > ~/.clasprc.json
+
+      - name: Push Apps Script
+        working-directory: apps-script
+        run: clasp push --force
+
+      - name: Deployment complete
+        run: echo "🚀 Seraphyx Staff Portal deployed successfully!"

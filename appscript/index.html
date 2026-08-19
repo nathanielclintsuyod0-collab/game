@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seraphyx Staff Portal</title>
+  <style>
+    :root{
+      --bg:#09070f;--panel:#13101d;--panel2:#191425;--text:#f7f2ff;
+      --muted:#aaa0b8;--purple:#b48bcf;--purple2:#e3d3f4;--border:rgba(180,139,207,.22);
+      --good:#68e0a3;--warn:#ffd166;--bad:#ff7080;--shadow:0 18px 60px rgba(0,0,0,.35)
+    }
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:
+      radial-gradient(circle at 20% 0%,rgba(180,139,207,.14),transparent 35%),
+      radial-gradient(circle at 100% 20%,rgba(227,211,244,.08),transparent 30%),var(--bg);color:var(--text)}
+    button,input,select,textarea{font:inherit}button{cursor:pointer}
+    .hidden{display:none!important}.app{min-height:100vh}.topbar{height:72px;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(9,7,15,.75);backdrop-filter:blur(14px);position:sticky;top:0;z-index:5}
+    .brand{display:flex;gap:12px;align-items:center;font-weight:900;letter-spacing:.8px}.logo{width:38px;height:38px;border-radius:12px;
+      display:grid;place-items:center;background:linear-gradient(135deg,var(--purple2),var(--purple));color:#24172d;box-shadow:0 0 30px rgba(180,139,207,.25)}
+    .user-mini{display:flex;align-items:center;gap:12px}.pill{padding:7px 11px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:12px}
+    .layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 72px)}.side{border-right:1px solid var(--border);padding:22px 14px}
+    .nav{display:grid;gap:8px}.nav button{border:1px solid transparent;background:transparent;color:var(--muted);padding:12px 14px;text-align:left;border-radius:12px}
+    .nav button:hover,.nav button.active{background:rgba(180,139,207,.11);border-color:var(--border);color:var(--text)}
+    main{padding:28px;max-width:1400px;width:100%;margin:auto}.grid{display:grid;gap:16px}.cards{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{background:linear-gradient(180deg,rgba(25,20,37,.92),rgba(19,16,29,.92));border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+    .stat .num{font-size:30px;font-weight:900;margin-top:7px}.muted{color:var(--muted)}h1,h2,h3{margin:0 0 8px}.section{margin-top:22px}
+    .btn{border:1px solid var(--border);background:#211a2d;color:var(--text);padding:11px 15px;border-radius:11px}.btn.primary{background:linear-gradient(135deg,var(--purple2),var(--purple));color:#26172f;border:0;font-weight:800}
+    .btn.danger{color:#ffb2bc}.btn.good{color:#baf7d7}.btn:disabled{opacity:.45;cursor:not-allowed}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .schedule{display:grid;grid-template-columns:110px 1fr auto;gap:18px;align-items:center;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+    .time{font-weight:900}.tag{font-size:11px;padding:5px 8px;border-radius:999px;background:rgba(180,139,207,.12);color:var(--purple2)}
+    table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid rgba(255,255,255,.06);font-size:13px}th{color:var(--muted);font-weight:600}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:grid;place-items:center;padding:20px;z-index:20}.modalbox{width:min(600px,100%);max-height:90vh;overflow:auto}
+    label{display:grid;gap:7px;margin:12px 0;color:var(--muted);font-size:13px}input,select,textarea{width:100%;background:#0d0a14;border:1px solid var(--border);color:var(--text);border-radius:10px;padding:11px;outline:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--purple)}textarea{min-height:90px;resize:vertical}.notice{padding:12px;border-radius:12px;background:rgba(180,139,207,.08);border:1px solid var(--border);margin-bottom:12px}
+    .auth{min-height:100vh;display:grid;place-items:center;padding:20px}.authbox{width:min(470px,100%);padding:30px}.tabs{display:flex;gap:7px;margin:20px 0}.tabs button{flex:1}
+    .toast{position:fixed;right:20px;bottom:20px;background:#191425;border:1px solid var(--border);padding:13px 16px;border-radius:12px;box-shadow:var(--shadow);z-index:30}
+    .goodtext{color:var(--good)}.warntext{color:var(--warn)}.badtext{color:var(--bad)}
+    @media(max-width:950px){.layout{grid-template-columns:1fr}.side{border-right:0;border-bottom:1px solid var(--border);padding:10px}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap}.cards{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){main{padding:18px}.topbar{padding:0 15px}.cards{grid-template-columns:1fr 1fr}.schedule{grid-template-columns:1fr}.user-mini .pill{display:none}}
+  </style>
+</head>
+<body>
+<div id="auth" class="auth">
+  <div class="card authbox">
+    <div class="brand"><div class="logo">S</div><div>SERAPHYX<br><span class="muted">Staff Portal</span></div></div>
+    <div class="tabs"><button class="btn primary" id="loginTab" onclick="showAuth('login')">Login</button><button class="btn" id="regTab" onclick="showAuth('register')">Register</button></div>
+
+    <form id="loginForm" onsubmit="doLogin(event)">
+      <label>Staff ID / Email / Discord ID<input id="loginIdentifier" required autocomplete="username"></label>
+      <label>Password<input id="loginPassword" type="password" required autocomplete="current-password"></label>
+      <button class="btn primary" style="width:100%">Login</button>
+    </form>
+
+    <form id="regForm" class="hidden" onsubmit="doRegister(event)">
+      <label>Full / Display Name<input id="rName" required></label>
+      <label>Discord Username<input id="rDiscordUsername"></label>
+      <label>Discord ID<input id="rDiscordId" required></label>
+      <label>Minecraft Username<input id="rMinecraft" required></label>
+      <label>Email<input id="rEmail" type="email" required></label>
+      <label>Requested Position
+        <select id="rRole"><option>Helper</option><option>Moderator</option><option>Admin</option></select>
+      </label>
+      <label>Password<input id="rPassword" type="password" minlength="6" required></label>
+      <button class="btn primary" style="width:100%">Submit Registration</button>
+    </form>
+    <p class="muted" style="font-size:12px;margin-top:16px">New registrations require administrator approval.</p>
+  </div>
+</div>
+
+<div id="app" class="app hidden">
+  <header class="topbar">
+    <div class="brand"><div class="logo">S</div><span>SERAPHYX STAFF</span></div>
+    <div class="user-mini"><span id="clock"></span><span class="pill" id="userPill"></span><button class="btn" onclick="logout()">Logout</button></div>
+  </header>
+  <div class="layout">
+    <aside class="side">
+      <div class="nav">
+        <button class="active" onclick="view('dashboard',this)">⌂ Dashboard</button>
+        <button onclick="view('schedule',this)">◷ My Schedule</button>
+        <button onclick="view('attendance',this)">◉ Attendance</button>
+        <button id="adminNav" class="hidden" onclick="view('admin',this)">⚙ Admin</button>
+      </div>
+    </aside>
+    <main>
+      <div id="content"></div>
+    </main>
+  </div>
+</div>
+
+<div id="modal" class="modal hidden"><div class="modalbox card" id="modalBox"></div></div>
+<div id="toast" class="toast hidden"></div>
+
+<script>
+let TOKEN = localStorage.getItem('seraphyx_token') || '';
+let DATA = null;
+let REFRESH = 30;
+let timer = null;
+
+function call(fn, ...args){
+  return new Promise((resolve,reject)=>{
+    google.script.run.withSuccessHandler(resolve).withFailureHandler(e=>reject(new Error(e.message||e)))[fn](...args);
+  });
+}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.remove('hidden');setTimeout(()=>el.classList.add('hidden'),3200)}
+function err(e){toast('⚠ '+(e.message||e))}
+function showAuth(mode){
+  document.getElementById('loginForm').classList.toggle('hidden',mode!=='login');
+  document.getElementById('regForm').classList.toggle('hidden',mode!=='register');
+  document.getElementById('loginTab').classList.toggle('primary',mode==='login');
+  document.getElementById('regTab').classList.toggle('primary',mode==='register');
+}
+async function doLogin(e){
+  e.preventDefault();
+  try{
+    const r=await call('login',{identifier:document.getElementById('loginIdentifier').value,password:document.getElementById('loginPassword').value});
+    TOKEN=r.token;localStorage.setItem('seraphyx_token',TOKEN);await startApp();
+  }catch(x){err(x)}
+}
+async function doRegister(e){
+  e.preventDefault();
+  try{
+    const r=await call('registerStaff',{
+      name:rName.value,discordUsername:rDiscordUsername.value,discordId:rDiscordId.value,
+      minecraft:rMinecraft.value,email:rEmail.value,requestedRole:rRole.value,password:rPassword.value
+    });
+    alert('Registration submitted! Your Staff ID is '+r.staffId+'. Save it. An administrator must approve your account.');
+    e.target.reset();showAuth('login');
+  }catch(x){err(x)}
+}
+async function startApp(){
+  try{
+    const info=await call('getPublicInfo');REFRESH=Math.max(10,Number(info.refreshSeconds)||30);
+    await refresh();document.getElementById('auth').classList.add('hidden');document.getElementById('app').classList.remove('hidden');
+    clearInterval(timer);timer=setInterval(refresh,REFRESH*1000);updateClock();
+  }catch(e){localStorage.removeItem('seraphyx_token');TOKEN='';err(e)}
+}
+async function refresh(){
+  if(!TOKEN)return;
+  try{
+    DATA=await call('getDashboard',TOKEN);
+    document.getElementById('userPill').textContent=DATA.user.name+' • '+DATA.user.role+' • '+DATA.user.staffId;
+    document.getElementById('adminNav').classList.toggle('hidden',!['Owner','Admin'].includes(DATA.user.role));
+    renderDashboard();
+  }catch(e){if(String(e.message).toLowerCase().includes('session'))logout();else err(e)}
+}
+function updateClock(){document.getElementById('clock').textContent=new Date().toLocaleString([], {dateStyle:'medium',timeStyle:'short'});setTimeout(updateClock,1000)}
+function view(name,btn){
+  document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');
+  if(name==='dashboard')renderDashboard();
+  if(name==='schedule')renderSchedule();
+  if(name==='attendance')renderAttendance();
+  if(name==='admin')renderAdmin();
+}
+function renderDashboard(){
+  const u=DATA.user,s=DATA.schedules||[],a=DATA.attendance||[];
+  const working=a.find(x=>x.status.toLowerCase()==='working');
+  const today=new Date().toISOString().slice(0,10);
+  const todayS=s.filter(x=>x.date===today);
+  document.getElementById('content').innerHTML=`
+    <div class="row" style="justify-content:space-between"><div><h1>Good evening, ${esc(u.name)}</h1><p class="muted">Staff ID ${esc(u.staffId)} • ${esc(u.role)}</p></div></div>
+    <div class="grid cards section">
+      <div class="card stat"><div class="muted">Today's Shifts</div><div class="num">${todayS.length}</div></div>
+      <div class="card stat"><div class="muted">Completed</div><div class="num">${a.filter(x=>x.status==='Completed').length}</div></div>
+      <div class="card stat"><div class="muted">Current Status</div><div class="num" style="font-size:21px">${working?'🟢 Working':'⚪ Off Duty'}</div></div>
+      <div class="card stat"><div class="muted">Upcoming</div><div class="num">${s.filter(x=>x.date>=today).length}</div></div>
+    </div>
+    <div class="grid section" style="grid-template-columns:1.5fr 1fr">
+      <div class="card"><h2>Today's Schedule</h2><div id="dashSchedule">${scheduleHTML(todayS,working)}</div></div>
+      <div class="card"><h2>Announcements</h2>${(DATA.announcements||[]).slice(0,5).map(x=>`<div class="notice"><b>${esc(x.title)}</b><div class="muted" style="margin-top:5px">${esc(x.message)}</div></div>`).join('')||'<p class="muted">No announcements.</p>'}</div>
+    </div>`;
+}
+function scheduleHTML(list,working){
+  if(!list.length)return '<p class="muted">No shifts scheduled today.</p>';
+  return list.map(s=>`<div class="schedule"><div class="time">${esc(s.startTime)}<br><span class="muted">to ${esc(s.endTime)}</span></div><div><b>${esc(s.task)}</b><div class="muted">${esc(s.notes||'No notes')}</div></div><div><span class="tag">${esc(s.status)}</span>${working&&working.scheduleId===s.id?'<div class="goodtext" style="margin-top:7px">● Current</div>':''}</div></div>`).join('');
+}
+function renderSchedule(){
+  const s=DATA.schedules||[];
+  document.getElementById('content').innerHTML=`<h1>My Schedule</h1><p class="muted">Your assigned staff shifts.</p>
+  <div class="card section">${s.length?s.sort((a,b)=>(a.date+a.startTime).localeCompare(b.date+b.startTime)).map(x=>`<div class="schedule"><div><b>${esc(x.date)}</b><br>${esc(x.startTime)}–${esc(x.endTime)}</div><div><b>${esc(x.task)}</b><div class="muted">${esc(x.notes||'')}</div></div><span class="tag">${esc(x.status)}</span></div>`).join(''):'<p class="muted">No schedules assigned.</p>'}</div>`;
+}
+function renderAttendance(){
+  const a=DATA.attendance||[];
+  document.getElementById('content').innerHTML=`<h1>Attendance</h1><p class="muted">Your latest attendance records.</p>
+  <div class="card section"><table><thead><tr><th>Date</th><th>Clock In</th><th>Clock Out</th><th>Status</th><th>Late</th><th>Worked</th></tr></thead><tbody>
+  ${a.map(x=>`<tr><td>${esc(x.date)}</td><td>${fmt(x.clockIn)}</td><td>${fmt(x.clockOut)}</td><td>${x.status==='Working'?'<span class="goodtext">● Working</span>':'✅ Completed'}</td><td>${x.lateMinutes||0} min</td><td>${Math.floor((x.minutesWorked||0)/60)}h ${(x.minutesWorked||0)%60}m</td></tr>`).join('')||'<tr><td colspan="6" class="muted">No attendance records.</td></tr>'}
+  </tbody></table></div>`;
+}
+function fmt(v){return v?v?new Date(v).toLocaleString([], {dateStyle:'medium',timeStyle:'short'}):'—':'—'}
+async function clockIn(id){
+  try{await call('clockIn',TOKEN,id);toast('🟢 Clocked in successfully.');await refresh();}catch(e){err(e)}
+}
+async function clockOut(){
+  try{const r=await call('clockOut',TOKEN);toast('🔵 Clocked out. Worked '+r.minutesWorked+' minutes.');await refresh();}catch(e){err(e)}
+}
+function scheduleActions(){
+  const a=DATA.attendance||[];const w=a.find(x=>x.status.toLowerCase()==='working');
+  if(w)return `<button class="btn primary" onclick="clockOut()">CLOCK OUT</button>`;
+  const today=new Date().toISOString().slice(0,10);const s=(DATA.schedules||[]).find(x=>x.date===today);
+  return `<button class="btn primary" onclick="clockIn('${s?s.id:''}')">CLOCK IN</button>`;
+}
+function renderAdmin(){
+  call('adminGetData',TOKEN).then(d=>{
+    window.ADMIN=d;
+    const pending=d.staff.filter(x=>x.status==='Pending');
+    document.getElementById('content').innerHTML=`<div class="row" style="justify-content:space-between"><div><h1>Admin Panel</h1><p class="muted">Manage Seraphyx staff and schedules.</p></div><div class="row"><button class="btn primary" onclick="openScheduleModal()">+ Schedule</button><button class="btn" onclick="openAnnouncementModal()">+ Announcement</button></div></div>
+    <div class="grid cards section">
+      <div class="card stat"><div class="muted">Staff</div><div class="num">${d.staff.filter(x=>x.status==='Active').length}</div></div>
+      <div class="card stat"><div class="muted">Pending</div><div class="num">${pending.length}</div></div>
+      <div class="card stat"><div class="muted">Schedules</div><div class="num">${d.schedules.length}</div></div>
+      <div class="card stat"><div class="muted">Working Now</div><div class="num">${d.attendance.filter(x=>x.status==='Working').length}</div></div>
+    </div>
+    <div class="card section"><h2>Pending Registrations</h2>${pending.length?`<table><thead><tr><th>ID</th><th>Name</th><th>Minecraft</th><th>Role</th><th>Action</th></tr></thead><tbody>${pending.map(x=>`<tr><td>${esc(x.staffId)}</td><td>${esc(x.name)}</td><td>${esc(x.minecraft)}</td><td>${esc(x.role)}</td><td><button class="btn good" onclick="approve('${x.staffId}',true)">Approve</button> <button class="btn danger" onclick="approve('${x.staffId}',false)">Reject</button></td></tr>`).join('')}</tbody></table>`:'<p class="muted">No pending registrations.</p>'}</div>
+    <div class="card section"><h2>Staff</h2><table><thead><tr><th>ID</th><th>Name</th><th>Role</th><th>Status</th><th>Change Role</th></tr></thead><tbody>${d.staff.map(x=>`<tr><td>${esc(x.staffId)}</td><td>${esc(x.name)}<br><span class="muted">${esc(x.minecraft)}</span></td><td>${esc(x.role)}</td><td>${esc(x.status)}</td><td><select onchange="role('${x.staffId}',this.value)"><option ${x.role==='Helper'?'selected':''}>Helper</option><option ${x.role==='Moderator'?'selected':''}>Moderator</option><option ${x.role==='Admin'?'selected':''}>Admin</option><option ${x.role==='Owner'?'selected':''}>Owner</option></select></td></tr>`).join('')}</tbody></table></div>
+    <div class="card section"><h2>Schedules</h2><table><thead><tr><th>Date</th><th>Staff</th><th>Time</th><th>Task</th><th></th></tr></thead><tbody>${d.schedules.map(x=>{const p=d.staff.find(y=>y.staffId===x.staffId);return `<tr><td>${esc(x.date)}</td><td>${esc(p?p.name:x.staffId)}</td><td>${esc(x.startTime)}–${esc(x.endTime)}</td><td>${esc(x.task)}</td><td><button class="btn danger" onclick="delSchedule('${x.id}')">Delete</button></td></tr>`}).join('')}</tbody></table></div>`;
+  }).catch(err);
+}
+async function approve(id,yes){try{await call('approveStaff',TOKEN,id,yes);toast(yes?'Approved.':'Rejected.');renderAdmin()}catch(e){err(e)}}
+async function role(id,r){try{await call('changeStaffRole',TOKEN,id,r);toast('Role updated.');renderAdmin()}catch(e){err(e)}}
+async function delSchedule(id){if(!confirm('Delete this schedule?'))return;try{await call('deleteSchedule',TOKEN,id);toast('Schedule deleted.');renderAdmin();await refresh()}catch(e){err(e)}}
+function openScheduleModal(){
+  const staff=(window.ADMIN?.staff||[]).filter(x=>x.status==='Active');
+  document.getElementById('modalBox').innerHTML=`<div class="row" style="justify-content:space-between"><h2>Create Schedule</h2><button class="btn" onclick="closeModal()">Close</button></div>
+  <label>Staff<select id="mStaff">${staff.map(x=>`<option value="${x.staffId}">${esc(x.name)} (${x.staffId})</option>`).join('')}</select></label>
+  <label>Date<input id="mDate" type="date" value="${new Date().toISOString().slice(0,10)}"></label>
+  <div class="row"><label style="flex:1">Start<input id="mStart" type="time" required></label><label style="flex:1">End<input id="mEnd" type="time" required></label></div>
+  <label>Task<input id="mTask" placeholder="Server monitoring" required></label><label>Notes<textarea id="mNotes"></textarea></label>
+  <button class="btn primary" onclick="saveSchedule()">Create Schedule</button>`;
+  document.getElementById('modal').classList.remove('hidden');
+}
+async function saveSchedule(){
+  try{await call('createSchedule',TOKEN,{staffId:mStaff.value,date:mDate.value,startTime:mStart.value,endTime:mEnd.value,task:mTask.value,notes:mNotes.value});toast('Schedule created.');closeModal();renderAdmin();await refresh()}catch(e){err(e)}
+}
+function openAnnouncementModal(){
+  document.getElementById('modalBox').innerHTML=`<div class="row" style="justify-content:space-between"><h2>Announcement</h2><button class="btn" onclick="closeModal()">Close</button></div>
+  <label>Title<input id="aTitle"></label><label>Message<textarea id="aMessage"></textarea></label><button class="btn primary" onclick="saveAnnouncement()">Publish</button>`;
+  document.getElementById('modal').classList.remove('hidden');
+}
+async function saveAnnouncement(){try{await call('addAnnouncement',TOKEN,aTitle.value,aMessage.value);toast('Announcement published.');closeModal();await refresh();}catch(e){err(e)}}
+function closeModal(){document.getElementById('modal').classList.add('hidden')}
+function logout(){if(TOKEN)call('logout',TOKEN).catch(()=>{});TOKEN='';localStorage.removeItem('seraphyx_token');clearInterval(timer);document.getElementById('app').classList.add('hidden');document.getElementById('auth').classList.remove('hidden');showAuth('login')}
+
+(async()=>{if(TOKEN)await startApp();})();
+</script>
+</body>
+</html>

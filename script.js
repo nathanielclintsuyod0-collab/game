@@ -197,8 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Cosmic purple cursor: glowing star core, orbiting moon and short-lived star trail.
 document.addEventListener('DOMContentLoaded', () => {
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!finePointer || reducedMotion) return;
+  if (!finePointer) return;
 
   const cursor = document.createElement('div');
   cursor.className = 'neo-cursor';

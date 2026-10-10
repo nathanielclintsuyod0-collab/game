@@ -1,12 +1,15 @@
-// Navigation, footer year, placeholder, and contact form.
+// KnownAsNeo portfolio interactions and dynamic background.
 document.addEventListener('DOMContentLoaded', () => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Mobile navigation.
   const menu = document.querySelector('.menu');
   const nav = document.querySelector('.topbar nav');
   if (menu && nav) {
     menu.setAttribute('aria-expanded', 'false');
     menu.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('open');
-      menu.setAttribute('aria-expanded', String(isOpen));
+      const open = nav.classList.toggle('open');
+      menu.setAttribute('aria-expanded', String(open));
     });
     nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
       nav.classList.remove('open');
@@ -27,11 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('#contactForm');
   if (form) form.addEventListener('submit', event => {
     event.preventDefault();
-    const getValue = selector => document.querySelector(selector)?.value?.trim() || '';
-    const name = getValue('#name');
-    const email = getValue('#email');
+    const value = selector => document.querySelector(selector)?.value?.trim() || '';
+    const name = value('#name');
+    const email = value('#email');
     const topic = document.querySelector('#topic')?.value || 'Portfolio enquiry';
-    const message = getValue('#message');
+    const message = value('#message');
     const recipient = 'YOUR_EMAIL@example.com';
     if (recipient === 'YOUR_EMAIL@example.com') {
       alert('To activate this form, open script.js and replace YOUR_EMAIL@example.com with your contact email.');
@@ -40,8 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = `mailto:${recipient}?subject=${encodeURIComponent('[Portfolio] ' + topic + ' — ' + name)}&body=${encodeURIComponent(message + '\n\nFrom: ' + name + '\nReply to: ' + email)}`;
   });
 
-  // Reveal content as it enters the viewport.
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Scroll reveal animations. Elements remain visible if JS or observers are unavailable.
   const revealSelector = '.section .heading, .panel, .principles article, .skill, .service-card, .project, .callout-inner, .contact-grid > div';
   const revealItems = [...document.querySelectorAll(revealSelector)];
   if (reduceMotion || !('IntersectionObserver' in window)) {
@@ -49,40 +51,144 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     revealItems.forEach((item, index) => {
       item.classList.add('js-reveal');
-      item.style.setProperty('--reveal-delay', `${(index % 4) * 65}ms`);
+      item.style.setProperty('--reveal-delay', `${(index % 4) * 75}ms`);
     });
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -28px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -24px 0px' });
     revealItems.forEach(item => observer.observe(item));
   }
 
-  // Make the sticky navigation feel more responsive while scrolling.
+  // Header gains depth as the page scrolls.
   const topbar = document.querySelector('.topbar');
-  const updateTopbar = () => {
-    if (topbar) topbar.classList.toggle('scrolled', window.scrollY > 12);
-  };
+  const updateTopbar = () => topbar?.classList.toggle('scrolled', window.scrollY > 12);
   updateTopbar();
   window.addEventListener('scroll', updateTopbar, { passive: true });
 
-  // Subtle pointer-following ambient glow on devices with a fine pointer.
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduceMotion) {
-    let pending = false;
+  // Pointer glow + subtle 3D card tilt on desktop.
+  if (!reduceMotion && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let queued = false;
     window.addEventListener('pointermove', event => {
-      if (pending) return;
-      pending = true;
+      if (queued) return;
+      queued = true;
       requestAnimationFrame(() => {
         document.documentElement.style.setProperty('--neo-pointer-x', `${event.clientX}px`);
         document.documentElement.style.setProperty('--neo-pointer-y', `${event.clientY}px`);
-        pending = false;
+        queued = false;
       });
     }, { passive: true });
+
+    document.querySelectorAll('.skill, .service-card, .project').forEach(card => {
+      card.addEventListener('pointermove', event => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width;
+        const y = (event.clientY - rect.top) / rect.height;
+        card.style.setProperty('--mx', `${x * 100}%`);
+        card.style.setProperty('--my', `${y * 100}%`);
+        if (card.matches('.project')) {
+          card.style.setProperty('--tilt-x', `${(0.5 - y) * 3}deg`);
+          card.style.setProperty('--tilt-y', `${(x - 0.5) * 4}deg`);
+        }
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.removeProperty('--tilt-x');
+        card.style.removeProperty('--tilt-y');
+      });
+    });
   }
+
+  // Tiny terminal cursor blink.
+  const cursor = document.querySelector('.cursor');
+  if (cursor && !reduceMotion) cursor.classList.add('cursor-live');
 });
 
-// Lightweight animated particle field. Respects reduced-motion preferences.
-(()=>{const canvas=document.getElementById('particleCanvas');if(!canvas)return;const ctx=canvas.getContext('2d');const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;let w=0,h=0,dpr=1,points=[],raf=0;function resize(){dpr=Math.min(window.devicePixelRatio||1,2);w=window.innerWidth;h=window.innerHeight;canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);const count=Math.min(85,Math.floor(w*h/18000));points=Array.from({length:count},()=>({x:Math.random()*w,y:Math.random()*h,r:.5+Math.random()*1.5,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,a:.15+Math.random()*.45}));draw(true)}function draw(staticOnly=false){ctx.clearRect(0,0,w,h);for(let i=0;i<points.length;i++){const p=points[i];if(!staticOnly&&!reduced){p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(205,164,255,${p.a})`;ctx.fill();if(!reduced){for(let j=i+1;j<points.length;j++){const q=points[j],dx=p.x-q.x,dy=p.y-q.y,d=dx*dx+dy*dy;if(d<105*105){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(164,119,207,${.08*(1-d/(105*105))})`;ctx.lineWidth=.6;ctx.stroke()}}}}if(!staticOnly&&!reduced)raf=requestAnimationFrame(()=>draw(false))}window.addEventListener('resize',()=>{cancelAnimationFrame(raf);resize()},{passive:true});if(!reduced)resize();else resize()})();
+// Animated particle network. IMPORTANT: start the animation loop after every resize.
+(() => {
+  const canvas = document.getElementById('particleCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let width = 0, height = 0, dpr = 1, points = [], raf = 0;
+  let pointer = { x: -1000, y: -1000 };
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.min(100, Math.max(28, Math.floor(width * height / 12500)));
+    points = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: .7 + Math.random() * 1.5,
+      vx: (Math.random() - .5) * .42,
+      vy: (Math.random() - .5) * .42,
+      alpha: .25 + Math.random() * .55,
+      phase: Math.random() * Math.PI * 2
+    }));
+    cancelAnimationFrame(raf);
+    draw(); // Previously this was draw(true), which rendered one still frame and stopped.
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    const time = performance.now() * .001;
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      if (!reduceMotion) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < -8) p.x = width + 8;
+        if (p.x > width + 8) p.x = -8;
+        if (p.y < -8) p.y = height + 8;
+        if (p.y > height + 8) p.y = -8;
+        const dx = p.x - pointer.x, dy = p.y - pointer.y;
+        const distance = Math.hypot(dx, dy);
+        if (distance < 115 && distance > 0) {
+          p.x += (dx / distance) * .45;
+          p.y += (dy / distance) * .45;
+        }
+      }
+      const pulse = reduceMotion ? 1 : .72 + Math.sin(time * 1.8 + p.phase) * .28;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * pulse, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(211, 174, 255, ${p.alpha})`;
+      ctx.fill();
+
+      for (let j = i + 1; j < points.length; j++) {
+        const q = points[j];
+        const dx = p.x - q.x, dy = p.y - q.y;
+        const distanceSquared = dx * dx + dy * dy;
+        if (distanceSquared < 125 * 125) {
+          const alpha = .16 * (1 - distanceSquared / (125 * 125));
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = `rgba(164, 119, 207, ${alpha})`;
+          ctx.lineWidth = .7;
+          ctx.stroke();
+        }
+      }
+    }
+    if (!reduceMotion) raf = requestAnimationFrame(draw);
+  }
+
+  if (!reduceMotion && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    window.addEventListener('pointermove', event => {
+      pointer = { x: event.clientX, y: event.clientY };
+    }, { passive: true });
+  }
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+})();

@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 
-// Cosmic purple cursor v5: use viewport coordinates via translate3d only.
+// Cosmic purple cursor v6: use viewport left/top with negative margins for exact centering.
 (() => {
   const initCosmicCursor = () => {
     if (document.querySelector('.neo-cursor')) return;
@@ -227,9 +227,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (event.pointerType === 'touch') return;
       lastX = event.clientX;
       lastY = event.clientY;
-      cursor.style.left = '0px';
-      cursor.style.top = '0px';
-      cursor.style.transform = `translate3d(${lastX}px, ${lastY}px, 0) translate(-50%, -50%)`;
+      cursor.style.left = lastX + 'px';
+      cursor.style.top = lastY + 'px';
+      cursor.style.transform = 'none';
       cursor.classList.add('is-visible');
       document.documentElement.classList.add('neo-custom-cursor');
       spawnTrail(lastX, lastY);

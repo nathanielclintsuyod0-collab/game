@@ -2,110 +2,33 @@
 /* Dynamic background, beginner label, service pricing, and launcher project */
 #particleCanvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.78}body>*:not(#particleCanvas):not(.ambient){position:relative;z-index:1}.skin-character{position:absolute;z-index:3;height:min(390px,34vw);width:auto;max-width:48%;object-fit:contain;right:-10px;bottom:2px;filter:drop-shadow(0 18px 24px #0009);animation:skin-float 5s ease-in-out infinite;image-rendering:pixelated}.art .terminal-card{margin-right:48px}.art .f2{right:-12px}@keyframes skin-float{0%,100%{transform:translateY(0) rotate(2deg)}50%{transform:translateY(-10px) rotate(-1deg)}}.ambient{position:fixed;width:44vw;height:44vw;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:-3;opacity:.13;animation:ambient-drift 18s ease-in-out infinite alternate}.ambient-one{background:#8c4dcc;top:-18vw;left:-14vw}.ambient-two{background:#4d3ac8;right:-18vw;bottom:-18vw;animation-delay:-8s}body{background-image:radial-gradient(ellipse at 50% 0%,#241332 0%,#0d0912 55%);background-attachment:fixed}.hero{isolation:isolate}.role-pill{display:inline-flex;align-items:center;gap:9px;margin:0 0 15px;padding:7px 11px;border:1px solid #c79aff3b;border-radius:999px;background:#c79aff0d;color:#d8b9ff;font-size:10px;letter-spacing:1.2px;font-weight:700}.role-pill span{width:7px;height:7px;border-radius:50%;background:#a7edbd;box-shadow:0 0 12px #a7edbd}.services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.service-card{position:relative;padding:24px;border:1px solid #ffffff12;border-radius:16px;background:linear-gradient(145deg,#1b1225dd,#100c16e8);box-shadow:0 12px 40px #00000018;transition:transform .25s,border-color .25s,background .25s;overflow:hidden}.service-card:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,#bd91ee77,transparent)}.service-card:hover{transform:translateY(-5px);border-color:#c79aff55;background:linear-gradient(145deg,#251532ee,#120d19ee)}.service-top{display:flex;align-items:center;justify-content:space-between;color:#9d85b5;font-size:11px;letter-spacing:1px;margin-bottom:20px}.service-symbol{font-size:23px;color:#d2adff}.service-card h3{font:600 19px "Space Grotesk",sans-serif;margin-bottom:10px}.service-card p{color:#b9adbf;font-size:13px;min-height:64px;margin-bottom:16px}.price{font:700 25px "Space Grotesk",sans-serif;color:#e4ccff;margin:8px 0 18px}.price small{font:400 12px "DM Sans",sans-serif;color:#a99bb5}.service-custom{background:linear-gradient(145deg,#251b31,#120d19)}.launcher-visual{min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;background:radial-gradient(circle at 50% 40%,#7e48ad55,transparent 55%),linear-gradient(145deg,#20112e,#100b18)}.launcher-icon{display:grid;place-items:center;width:78px;height:78px;border-radius:23px;border:1px solid #d6b5ff66;background:linear-gradient(145deg,#3a2054,#170e22);box-shadow:0 0 45px #a35be833;font:700 38px "Space Grotesk",sans-serif;color:#e6d2ff;transform:rotate(-5deg)}.launcher-icon span{font-size:16px;color:#b889f0}.launcher-label{font:700 11px "Space Grotesk",sans-serif;letter-spacing:2px}.launcher-visual small{font-size:9px;letter-spacing:2px;color:#a997b9}.mini-note{font-size:11px!important;min-height:0!important;margin-top:12px;margin-bottom:0!important;color:#94869e!important}.contact-links a>span{font-weight:700}@keyframes ambient-drift{from{transform:translate3d(-2%,0,0) scale(.9)}to{transform:translate3d(8%,7%,0) scale(1.12)}}@media(max-width:900px){.services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.services-grid{grid-template-columns:1fr}.service-card p{min-height:0}.ambient{width:70vw;height:70vw;filter:blur(70px)}}@media(prefers-reduced-motion:reduce){.ambient{animation:none}.skin-character{animation:none}.service-card{transition:none}}
 
-
-/* =====================================================
-   KNOWNASNEO — DYNAMIC POLISH PATCH
-   Appended overrides; original visual system is retained.
-   ===================================================== */
-:root {
-  --neo-accent: #c79aff;
-  --neo-accent-soft: rgba(199, 154, 255, .18);
-  --neo-pointer-x: 50%;
-  --neo-pointer-y: 30%;
-}
-
-html { scroll-behavior: smooth; }
-body { isolation: isolate; }
-::selection { color: #170d21; background: #d7b6ff; }
-
-/* Gentle pointer-following light; the JS updates these coordinates. */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: .34;
-  background: radial-gradient(420px circle at var(--neo-pointer-x) var(--neo-pointer-y), rgba(151, 93, 207, .10), transparent 70%);
-  transition: opacity .3s ease;
-}
-
-/* Keep real content above the decorative light and particle canvas. */
-.topbar, main, .callout, .contact, body > footer {
-  position: relative;
-  z-index: 1;
-}
-
-.topbar {
-  transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease;
-}
-.topbar.scrolled {
-  background: rgba(13, 9, 18, .94);
-  border-bottom-color: rgba(199, 154, 255, .18);
-  box-shadow: 0 10px 35px rgba(0, 0, 0, .18);
-}
-
-/* Scroll reveals are only hidden when JS successfully activates them. */
-.js-reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-.js-reveal.is-visible { opacity: 1; transform: translateY(0); }
-
-.skill, .service-card, .project, .panel, .contact-links > a, .terminal-card {
-  will-change: transform;
-}
-.skill, .service-card, .project, .panel, .contact-links > a {
-  transition: transform .28s cubic-bezier(.2, .7, .2, 1), border-color .28s ease, box-shadow .28s ease, background-color .28s ease;
-}
-.skill:hover, .service-card:hover, .project:hover, .panel:hover {
-  box-shadow: 0 18px 48px rgba(0, 0, 0, .20), 0 0 28px rgba(153, 93, 207, .07);
-}
-.contact-links > a:hover {
-  transform: translateX(4px);
-  border-color: rgba(199, 154, 255, .4);
-  background: rgba(199, 154, 255, .045);
-}
-
-.btn:focus-visible, .topbar a:focus-visible, .textlink:focus-visible,
-.contact-links a:focus-visible, .menu:focus-visible {
-  outline: 2px solid #d7b6ff;
-  outline-offset: 4px;
-}
-
-/* Animated accent on the hero terminal. */
-.terminal-card {
-  animation: neo-terminal-float 7s ease-in-out infinite;
-  transform-origin: center;
-}
-@keyframes neo-terminal-float {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -7px; }
-}
-
-/* Slightly richer motion for the existing decorative orbits. */
-.orbit { animation: neo-orbit 28s linear infinite; }
-.orbit2 { animation: neo-orbit 38s linear infinite reverse; }
-@keyframes neo-orbit { to { rotate: 360deg; } }
-
-/* Ensure the particle canvas never blocks text, links, or forms. */
-#particleCanvas { pointer-events: none !important; }
-
-@media (hover: none), (max-width: 650px) {
-  body::after { display: none; }
-  .terminal-card { animation-duration: 9s; }
-  .orbit, .orbit2 { animation-duration: 55s; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-    scroll-behavior: auto !important;
-  }
-  .js-reveal { opacity: 1; transform: none; }
-}
+/* Dynamic interaction layer: more visible motion while preserving the original theme. */
+:root{--neo-pointer-x:50vw;--neo-pointer-y:30vh}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(500px circle at var(--neo-pointer-x) var(--neo-pointer-y),rgba(156,91,218,.17),transparent 72%);opacity:.9}
+#particleCanvas{position:fixed!important;inset:0!important;z-index:0!important;pointer-events:none!important;opacity:.95}
+.topbar,main,body>footer{position:relative;z-index:1}
+.topbar{transition:background .25s ease,border-color .25s ease,box-shadow .25s ease}
+.topbar.scrolled{background:rgba(13,9,18,.96);border-bottom-color:#c79aff45;box-shadow:0 12px 35px #0005}
+.js-reveal{opacity:0;transform:translateY(28px) scale(.99);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.75,.2,1);transition-delay:var(--reveal-delay,0ms)}
+.js-reveal.is-visible{opacity:1;transform:translateY(0) scale(1)}
+.skill,.service-card,.project{position:relative;isolation:isolate;overflow:hidden}
+.skill::after,.service-card::after,.project::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(180,139,207,.16),transparent 72%);transition:opacity .25s ease}
+.skill:hover::after,.service-card:hover::after,.project:hover::after{opacity:1}
+.skill:hover,.service-card:hover{transform:translateY(-7px);border-color:#c79aff70;box-shadow:0 18px 42px #0004,0 0 28px #a66be822}
+.project{transform:perspective(900px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg));transition:transform .2s ease,border-color .3s ease,box-shadow .3s ease}
+.project:hover{border-color:#c79aff75;box-shadow:0 22px 55px #0005,0 0 28px #a66be822}
+.terminal-card{animation:neo-card-float 5.5s ease-in-out infinite;will-change:transform}
+@keyframes neo-card-float{0%,100%{translate:0 0;rotate:1deg}50%{translate:0 -11px;rotate:-.4deg}}
+.orbit{animation:neo-orbit-spin 32s linear infinite;transform-origin:center}
+.orbit2{animation:neo-orbit-spin 44s linear infinite reverse;transform-origin:center}
+@keyframes neo-orbit-spin{to{rotate:360deg}}
+.float{animation:neo-bob 4.2s ease-in-out infinite}
+.f2{animation-delay:-2.1s}
+@keyframes neo-bob{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.cursor-live{animation:neo-cursor-blink 1s steps(2,start) infinite}
+@keyframes neo-cursor-blink{to{opacity:.12}}
+.btn:hover{filter:brightness(1.08);box-shadow:0 10px 30px #a66be833}
+.contact-links>a{transition:transform .25s ease,border-color .25s ease,background .25s ease}
+.contact-links>a:hover{transform:translateX(5px);border-color:#c79aff66;background:#c79aff0a}
+@media(max-width:650px){.project{transform:none}.terminal-card{animation-duration:7s}.float{animation-duration:5s}}
+@media(prefers-reduced-motion:reduce){.js-reveal{opacity:1;transform:none}.terminal-card,.orbit,.orbit2,.float,.cursor-live{animation:none!important}.project{transform:none!important}}

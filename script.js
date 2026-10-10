@@ -194,62 +194,79 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 
-// Cosmic purple cursor: glowing star core, orbiting moon and short-lived star trail.
-document.addEventListener('DOMContentLoaded', () => {
-  // Do not gate this on CSS pointer media queries: touchscreen laptops can report
-  // a coarse primary pointer even when a mouse is actively being used.
+// Cosmic purple cursor v3: initialize immediately, with mouse and pointer fallbacks.
+(() => {
+  const initCosmicCursor = () => {
+    if (!document.body || document.querySelector('.neo-cursor')) return;
 
-  const cursor = document.createElement('div');
-  cursor.className = 'neo-cursor';
-  cursor.setAttribute('aria-hidden', 'true');
-  const moon = document.createElement('span');
-  moon.className = 'neo-cursor-moon';
-  const label = document.createElement('span');
-  label.className = 'neo-cursor-label';
-  cursor.append(moon, label);
-  document.body.appendChild(cursor);
-  document.documentElement.classList.add('neo-custom-cursor');
+    const cursor = document.createElement('div');
+    cursor.className = 'neo-cursor';
+    cursor.setAttribute('aria-hidden', 'true');
+    cursor.innerHTML = '<span class="neo-cursor-moon"></span><span class="neo-cursor-label"></span>';
+    document.body.appendChild(cursor);
 
-  let x = -100, y = -100, lastTrail = 0, frame = 0;
-  const render = () => {
-    cursor.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
-    frame = 0;
-  };
-  const spawnTrail = (px, py) => {
-    const now = performance.now();
-    if (now - lastTrail < 38) return;
-    lastTrail = now;
-    const star = document.createElement('span');
-    star.className = 'neo-cursor-trail';
-    star.textContent = Math.random() > .72 ? '✧' : '·';
-    star.style.transform = `translate(${px}px, ${py}px)`;
-    star.style.fontSize = `${7 + Math.random() * 10}px`;
-    document.body.appendChild(star);
-    star.addEventListener('animationend', () => star.remove(), { once: true });
-  };
-  window.addEventListener('pointermove', event => {
-    if (event.pointerType === 'touch') return;
-    x = event.clientX; y = event.clientY;
-    cursor.classList.add('is-visible');
-    if (!frame) frame = requestAnimationFrame(render);
-    spawnTrail(x, y);
-  }, { passive: true });
-  document.addEventListener('pointerleave', () => cursor.classList.remove('is-visible'));
-  document.addEventListener('pointerenter', () => { if (x >= 0 && y >= 0) cursor.classList.add('is-visible'); });
-  document.addEventListener('pointerdown', () => cursor.classList.add('is-clicking'));
-  document.addEventListener('pointerup', () => cursor.classList.remove('is-clicking'));
-  window.addEventListener('blur', () => cursor.classList.remove('is-visible'));
+    // Keep the native cursor until the custom cursor has actually received movement.
+    let hasMoved = false;
+    let x = -100, y = -100, lastTrail = 0, frame = 0;
+    const label = cursor.querySelector('.neo-cursor-label');
 
-  const interactive = 'a, button, input, textarea, select, [role="button"], .project, .skill, .service-card, .btn';
-  const setHover = element => {
-    cursor.classList.add('is-hovering');
-    label.textContent = element.matches('a, button, [role="button"], .btn') ? 'WARP' : 'COSMIC';
-  };
-  document.querySelectorAll(interactive).forEach(element => {
-    element.addEventListener('pointerenter', () => setHover(element));
-    element.addEventListener('pointerleave', () => {
-      cursor.classList.remove('is-hovering');
-      label.textContent = '';
+    const render = () => {
+      cursor.style.left = `${x}px`;
+      cursor.style.top = `${y}px`;
+      cursor.style.transform = 'translate(-50%, -50%)';
+      frame = 0;
+    };
+
+    const spawnTrail = (px, py) => {
+      const now = performance.now();
+      if (now - lastTrail < 55) return;
+      lastTrail = now;
+      const star = document.createElement('span');
+      star.className = 'neo-cursor-trail';
+      star.textContent = Math.random() > .65 ? '✧' : '·';
+      star.style.left = `${px}px`;
+      star.style.top = `${py}px`;
+      star.style.fontSize = `${8 + Math.random() * 8}px`;
+      document.body.appendChild(star);
+      star.addEventListener('animationend', () => star.remove(), { once: true });
+    };
+
+    const move = event => {
+      if (event.pointerType === 'touch') return;
+      x = event.clientX;
+      y = event.clientY;
+      if (!hasMoved) {
+        hasMoved = true;
+        document.documentElement.classList.add('neo-custom-cursor');
+      }
+      cursor.classList.add('is-visible');
+      if (!frame) frame = requestAnimationFrame(render);
+      spawnTrail(x, y);
+    };
+
+    window.addEventListener('pointermove', move, { passive: true });
+    window.addEventListener('mousemove', move, { passive: true });
+    window.addEventListener('pointerdown', () => cursor.classList.add('is-clicking'));
+    window.addEventListener('pointerup', () => cursor.classList.remove('is-clicking'));
+    window.addEventListener('blur', () => cursor.classList.remove('is-visible'));
+    window.addEventListener('focus', () => { if (hasMoved) cursor.classList.add('is-visible'); });
+
+    const interactive = 'a, button, input, textarea, select, [role="button"], .project, .skill, .service-card, .btn';
+    document.querySelectorAll(interactive).forEach(element => {
+      element.addEventListener('pointerenter', () => {
+        cursor.classList.add('is-hovering');
+        label.textContent = element.matches('a, button, [role="button"], .btn') ? 'WARP' : 'COSMIC';
+      });
+      element.addEventListener('pointerleave', () => {
+        cursor.classList.remove('is-hovering');
+        label.textContent = '';
+      });
     });
-  });
-});
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCosmicCursor, { once: true });
+  } else {
+    initCosmicCursor();
+  }
+})();

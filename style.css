@@ -38,10 +38,10 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;back
 
 /* COSMIC PURPLE CURSOR — compatible with desktop mice and touchscreen laptops */
 :root { --cosmic-violet: #b985ff; --cosmic-lilac: #ead8ff; --cosmic-deep: #7037d4; }
-html.neo-custom-cursor, html.neo-custom-cursor body,
-html.neo-custom-cursor a, html.neo-custom-cursor button,
-html.neo-custom-cursor input, html.neo-custom-cursor textarea,
-html.neo-custom-cursor select, html.neo-custom-cursor [role="button"] { cursor: none !important; }
+html.neo-custom-cursor, html.neo-custom-cursor *,
+html.neo-custom-cursor *::before, html.neo-custom-cursor *::after {
+  cursor: none !important;
+}
 .neo-cursor {
   position: fixed; left: 0; top: 0; width: 42px; height: 42px;
   display: block !important; visibility: visible !important;
@@ -58,7 +58,7 @@ html.neo-custom-cursor select, html.neo-custom-cursor [role="button"] { cursor: 
 .neo-cursor.is-visible { opacity: 1 !important; visibility: visible !important; }
 .neo-cursor::before { content: ""; position: absolute; inset: -8px; border: 1px dashed #d4b2ff; border-radius: 50%; animation: cosmic-cursor-orbit 5s linear infinite; }
 .neo-cursor::after { content: "✦"; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-54%); font: 16px/1 sans-serif; color: #fff; text-shadow: 0 0 8px #d6adff,0 0 17px #a66aff; animation: cosmic-star-pulse 2s ease-in-out infinite; }
-.neo-cursor-moon { position: absolute; width: 8px; height: 8px; right: -5px; top: 1px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px #d7b5ff,0 0 15px #a66aff; }
+.neo-cursor-moon { display: none !important; }
 .neo-cursor-label { position: absolute; left: 50%; top: calc(100% + 13px); transform: translateX(-50%); color: #ead8ff; font: 700 7px/1 sans-serif; letter-spacing: 1.8px; white-space: nowrap; opacity: 0; text-shadow: 0 0 9px #9c61ef; transition: opacity .2s ease; }
 .neo-cursor.is-hovering { width: 58px; height: 58px; border-color: #fff; background: radial-gradient(circle,#c99bff66,#8b4de544 62%,transparent 76%); box-shadow: 0 0 20px #b37aff,0 0 48px #8f4bdfcc,inset 0 0 18px #d6b2ff75; }
 .neo-cursor.is-hovering::before { inset: -10px; border-color: #f0ddff; }

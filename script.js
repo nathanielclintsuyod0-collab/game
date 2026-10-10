@@ -192,3 +192,64 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', resize, { passive: true });
   resize();
 })();
+
+
+// Cosmic purple cursor: glowing star core, orbiting moon and short-lived star trail.
+document.addEventListener('DOMContentLoaded', () => {
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!finePointer || reducedMotion) return;
+
+  const cursor = document.createElement('div');
+  cursor.className = 'neo-cursor';
+  cursor.setAttribute('aria-hidden', 'true');
+  const moon = document.createElement('span');
+  moon.className = 'neo-cursor-moon';
+  const label = document.createElement('span');
+  label.className = 'neo-cursor-label';
+  cursor.append(moon, label);
+  document.body.appendChild(cursor);
+  document.documentElement.classList.add('neo-custom-cursor');
+
+  let x = -100, y = -100, lastTrail = 0, frame = 0;
+  const render = () => {
+    cursor.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+    frame = 0;
+  };
+  const spawnTrail = (px, py) => {
+    const now = performance.now();
+    if (now - lastTrail < 38) return;
+    lastTrail = now;
+    const star = document.createElement('span');
+    star.className = 'neo-cursor-trail';
+    star.textContent = Math.random() > .72 ? '✧' : '·';
+    star.style.transform = `translate(${px}px, ${py}px)`;
+    star.style.fontSize = `${7 + Math.random() * 10}px`;
+    document.body.appendChild(star);
+    star.addEventListener('animationend', () => star.remove(), { once: true });
+  };
+  window.addEventListener('pointermove', event => {
+    x = event.clientX; y = event.clientY;
+    cursor.classList.add('is-visible');
+    if (!frame) frame = requestAnimationFrame(render);
+    spawnTrail(x, y);
+  }, { passive: true });
+  document.addEventListener('pointerleave', () => cursor.classList.remove('is-visible'));
+  document.addEventListener('pointerenter', () => cursor.classList.add('is-visible'));
+  document.addEventListener('pointerdown', () => cursor.classList.add('is-clicking'));
+  document.addEventListener('pointerup', () => cursor.classList.remove('is-clicking'));
+  window.addEventListener('blur', () => cursor.classList.remove('is-visible'));
+
+  const interactive = 'a, button, input, textarea, select, [role="button"], .project, .skill, .service-card, .btn';
+  const setHover = element => {
+    cursor.classList.add('is-hovering');
+    label.textContent = element.matches('a, button, [role="button"], .btn') ? 'WARP' : 'COSMIC';
+  };
+  document.querySelectorAll(interactive).forEach(element => {
+    element.addEventListener('pointerenter', () => setHover(element));
+    element.addEventListener('pointerleave', () => {
+      cursor.classList.remove('is-hovering');
+      label.textContent = '';
+    });
+  });
+});

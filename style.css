@@ -43,10 +43,12 @@ html.neo-custom-cursor a, html.neo-custom-cursor button,
 html.neo-custom-cursor input, html.neo-custom-cursor textarea,
 html.neo-custom-cursor select, html.neo-custom-cursor [role="button"] { cursor: none !important; }
 .neo-cursor {
-  position: fixed; left: -100px; top: -100px; width: 42px; height: 42px;
+  position: fixed; left: 0; top: 0; width: 42px; height: 42px;
   display: block !important; visibility: visible !important;
   z-index: 2147483647 !important; pointer-events: none !important; opacity: 0;
-  transform: translate3d(-100px,-100px,0) translate(-50%,-50%);
+  /* JS writes viewport coordinates to left/top; translate only centers the cursor. */
+  transform: translate(-50%, -50%);
+  margin: 0 !important; padding: 0 !important; box-sizing: border-box;
   border: 2px solid rgba(226,196,255,.98); border-radius: 50%;
   background: radial-gradient(circle,rgba(185,133,255,.5) 0%,rgba(133,73,224,.24) 48%,rgba(133,73,224,0) 75%);
   box-shadow: 0 0 15px #a866ff, 0 0 34px #8f4bdfb0, inset 0 0 16px #cba4ff80;

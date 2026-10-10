@@ -43,7 +43,8 @@ html.neo-custom-cursor a, html.neo-custom-cursor button,
 html.neo-custom-cursor input, html.neo-custom-cursor textarea,
 html.neo-custom-cursor select, html.neo-custom-cursor [role="button"] { cursor: none !important; }
 .neo-cursor {
-  position: fixed; left: 0; top: 0; width: 42px; height: 42px;
+  position: fixed; left: -100px; top: -100px; width: 42px; height: 42px;
+  display: block !important; visibility: visible !important;
   z-index: 2147483647 !important; pointer-events: none !important; opacity: 0;
   transform: translate3d(-100px,-100px,0) translate(-50%,-50%);
   border: 2px solid rgba(226,196,255,.98); border-radius: 50%;
@@ -52,7 +53,7 @@ html.neo-custom-cursor select, html.neo-custom-cursor [role="button"] { cursor: 
   mix-blend-mode: normal; will-change: transform;
   transition: opacity .12s ease,width .2s ease,height .2s ease,border-color .2s ease,box-shadow .2s ease;
 }
-.neo-cursor.is-visible { opacity: 1 !important; }
+.neo-cursor.is-visible { opacity: 1 !important; visibility: visible !important; }
 .neo-cursor::before { content: ""; position: absolute; inset: -8px; border: 1px dashed #d4b2ff; border-radius: 50%; animation: cosmic-cursor-orbit 5s linear infinite; }
 .neo-cursor::after { content: "✦"; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-54%); font: 16px/1 sans-serif; color: #fff; text-shadow: 0 0 8px #d6adff,0 0 17px #a66aff; animation: cosmic-star-pulse 2s ease-in-out infinite; }
 .neo-cursor-moon { position: absolute; width: 8px; height: 8px; right: -5px; top: 1px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px #d7b5ff,0 0 15px #a66aff; }

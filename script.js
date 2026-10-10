@@ -196,8 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Cosmic purple cursor: glowing star core, orbiting moon and short-lived star trail.
 document.addEventListener('DOMContentLoaded', () => {
-  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (!finePointer) return;
+  // Do not gate this on CSS pointer media queries: touchscreen laptops can report
+  // a coarse primary pointer even when a mouse is actively being used.
 
   const cursor = document.createElement('div');
   cursor.className = 'neo-cursor';
@@ -228,13 +228,14 @@ document.addEventListener('DOMContentLoaded', () => {
     star.addEventListener('animationend', () => star.remove(), { once: true });
   };
   window.addEventListener('pointermove', event => {
+    if (event.pointerType === 'touch') return;
     x = event.clientX; y = event.clientY;
     cursor.classList.add('is-visible');
     if (!frame) frame = requestAnimationFrame(render);
     spawnTrail(x, y);
   }, { passive: true });
   document.addEventListener('pointerleave', () => cursor.classList.remove('is-visible'));
-  document.addEventListener('pointerenter', () => cursor.classList.add('is-visible'));
+  document.addEventListener('pointerenter', () => { if (x >= 0 && y >= 0) cursor.classList.add('is-visible'); });
   document.addEventListener('pointerdown', () => cursor.classList.add('is-clicking'));
   document.addEventListener('pointerup', () => cursor.classList.remove('is-clicking'));
   window.addEventListener('blur', () => cursor.classList.remove('is-visible'));

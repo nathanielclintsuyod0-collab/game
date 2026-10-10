@@ -194,54 +194,45 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 
-// Cosmic purple cursor v3: initialize immediately, with mouse and pointer fallbacks.
+// Cosmic purple cursor v4: mount at the document root to avoid stacking-context issues.
 (() => {
   const initCosmicCursor = () => {
-    if (!document.body || document.querySelector('.neo-cursor')) return;
+    if (document.querySelector('.neo-cursor')) return;
 
     const cursor = document.createElement('div');
     cursor.className = 'neo-cursor';
     cursor.setAttribute('aria-hidden', 'true');
     cursor.innerHTML = '<span class="neo-cursor-moon"></span><span class="neo-cursor-label"></span>';
-    document.body.appendChild(cursor);
+    // Mount directly under <html>, not inside a transformed/isolated page container.
+    document.documentElement.appendChild(cursor);
 
-    // Keep the native cursor until the custom cursor has actually received movement.
-    let hasMoved = false;
-    let x = -100, y = -100, lastTrail = 0, frame = 0;
     const label = cursor.querySelector('.neo-cursor-label');
+    let lastTrail = 0;
+    let lastX = -100, lastY = -100;
 
-    const render = () => {
-      cursor.style.left = `${x}px`;
-      cursor.style.top = `${y}px`;
-      cursor.style.transform = 'translate(-50%, -50%)';
-      frame = 0;
-    };
-
-    const spawnTrail = (px, py) => {
+    const spawnTrail = (x, y) => {
       const now = performance.now();
-      if (now - lastTrail < 55) return;
+      if (now - lastTrail < 65) return;
       lastTrail = now;
       const star = document.createElement('span');
       star.className = 'neo-cursor-trail';
       star.textContent = Math.random() > .65 ? '✧' : '·';
-      star.style.left = `${px}px`;
-      star.style.top = `${py}px`;
-      star.style.fontSize = `${8 + Math.random() * 8}px`;
-      document.body.appendChild(star);
+      star.style.left = x + 'px';
+      star.style.top = y + 'px';
+      star.style.fontSize = (8 + Math.random() * 8) + 'px';
+      document.documentElement.appendChild(star);
       star.addEventListener('animationend', () => star.remove(), { once: true });
     };
 
     const move = event => {
       if (event.pointerType === 'touch') return;
-      x = event.clientX;
-      y = event.clientY;
-      if (!hasMoved) {
-        hasMoved = true;
-        document.documentElement.classList.add('neo-custom-cursor');
-      }
+      lastX = event.clientX;
+      lastY = event.clientY;
+      cursor.style.left = lastX + 'px';
+      cursor.style.top = lastY + 'px';
       cursor.classList.add('is-visible');
-      if (!frame) frame = requestAnimationFrame(render);
-      spawnTrail(x, y);
+      document.documentElement.classList.add('neo-custom-cursor');
+      spawnTrail(lastX, lastY);
     };
 
     window.addEventListener('pointermove', move, { passive: true });
@@ -249,7 +240,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('pointerdown', () => cursor.classList.add('is-clicking'));
     window.addEventListener('pointerup', () => cursor.classList.remove('is-clicking'));
     window.addEventListener('blur', () => cursor.classList.remove('is-visible'));
-    window.addEventListener('focus', () => { if (hasMoved) cursor.classList.add('is-visible'); });
+    window.addEventListener('focus', () => {
+      if (lastX >= 0 && lastY >= 0) cursor.classList.add('is-visible');
+    });
 
     const interactive = 'a, button, input, textarea, select, [role="button"], .project, .skill, .service-card, .btn';
     document.querySelectorAll(interactive).forEach(element => {

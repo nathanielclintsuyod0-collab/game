@@ -36,58 +36,34 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;back
 
 
 
-/* COSMIC PURPLE CURSOR — orbiting moon, nebula glow and star trail */
+/* COSMIC PURPLE CURSOR — compatible with desktop mice and touchscreen laptops */
 :root { --cosmic-violet: #b985ff; --cosmic-lilac: #ead8ff; --cosmic-deep: #7037d4; }
-@media (hover: hover) and (pointer: fine) {
-  html.neo-custom-cursor, html.neo-custom-cursor body,
-  html.neo-custom-cursor a, html.neo-custom-cursor button,
-  html.neo-custom-cursor input, html.neo-custom-cursor textarea,
-  html.neo-custom-cursor select, html.neo-custom-cursor [role="button"] {
-    cursor: none !important;
-  }
-  .neo-cursor {
-    position: fixed; left: 0; top: 0; width: 38px; height: 38px;
-    z-index: 2147483647; pointer-events: none; opacity: 0;
-    transform: translate3d(-100px,-100px,0) translate(-50%,-50%);
-    border: 1px solid rgba(214,177,255,.8); border-radius: 50%;
-    background: radial-gradient(circle,rgba(185,133,255,.24) 0%,rgba(133,73,224,.12) 45%,rgba(133,73,224,0) 74%);
-    box-shadow: 0 0 12px #a866ff8c, 0 0 28px #8f4bdf59, inset 0 0 13px #cba4ff35;
-    mix-blend-mode: screen; will-change: transform;
-    transition: opacity .2s ease,width .25s ease,height .25s ease,border-color .25s ease,box-shadow .25s ease;
-  }
-  .neo-cursor.is-visible { opacity: 1; }
-  .neo-cursor::before {
-    content: ""; position: absolute; inset: -7px; border: 1px dashed #c69aff99;
-    border-radius: 50%; animation: cosmic-cursor-orbit 8s linear infinite;
-  }
-  .neo-cursor::after {
-    content: "✦"; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-54%);
-    font: 12px/1 "DM Sans",sans-serif; color: #f5e8ff;
-    text-shadow: 0 0 8px #d6adff, 0 0 17px #a66aff; animation: cosmic-star-pulse 2.4s ease-in-out infinite;
-  }
-  .neo-cursor-moon {
-    position: absolute; width: 7px; height: 7px; right: -5px; top: 1px;
-    border-radius: 50%; background: #f3e6ff; box-shadow: 0 0 8px #d7b5ff,0 0 15px #a66aff;
-  }
-  .neo-cursor-label {
-    position: absolute; left: 50%; top: calc(100% + 13px); transform: translateX(-50%);
-    color: #ead8ff; font: 700 7px/1 "DM Sans",sans-serif; letter-spacing: 1.8px;
-    white-space: nowrap; opacity: 0; text-shadow: 0 0 9px #9c61ef; transition: opacity .2s ease;
-  }
-  .neo-cursor.is-hovering { width: 56px; height: 56px; border-color: #f0ddff; background: radial-gradient(circle,#c99bff45, #8b4de522 62%,transparent 76%); box-shadow: 0 0 18px #b37affb0,0 0 45px #8f4bdf75,inset 0 0 18px #d6b2ff52; }
-  .neo-cursor.is-hovering::before { inset: -10px; border-color: #e1c6ffb5; }
-  .neo-cursor.is-hovering .neo-cursor-label { opacity: 1; }
-  .neo-cursor.is-clicking { width: 25px; height: 25px; box-shadow: 0 0 32px #c69aff,0 0 60px #8f4bdf99; }
-  .neo-cursor.is-clicking::after { content: "✧"; }
-  .neo-cursor-trail {
-    position: fixed; z-index: 99998; pointer-events: none; left: 0; top: 0;
-    color: #d8b7ff; font: 10px/1 "DM Sans",sans-serif;
-    text-shadow: 0 0 8px #b47bff,0 0 15px #8742df;
-    will-change: transform,opacity; animation: cosmic-trail-fade .72s ease-out forwards;
-  }
+html.neo-custom-cursor, html.neo-custom-cursor body,
+html.neo-custom-cursor a, html.neo-custom-cursor button,
+html.neo-custom-cursor input, html.neo-custom-cursor textarea,
+html.neo-custom-cursor select, html.neo-custom-cursor [role="button"] { cursor: none !important; }
+.neo-cursor {
+  position: fixed; left: 0; top: 0; width: 42px; height: 42px;
+  z-index: 2147483647 !important; pointer-events: none !important; opacity: 0;
+  transform: translate3d(-100px,-100px,0) translate(-50%,-50%);
+  border: 2px solid rgba(226,196,255,.98); border-radius: 50%;
+  background: radial-gradient(circle,rgba(185,133,255,.5) 0%,rgba(133,73,224,.24) 48%,rgba(133,73,224,0) 75%);
+  box-shadow: 0 0 15px #a866ff, 0 0 34px #8f4bdfb0, inset 0 0 16px #cba4ff80;
+  mix-blend-mode: normal; will-change: transform;
+  transition: opacity .12s ease,width .2s ease,height .2s ease,border-color .2s ease,box-shadow .2s ease;
 }
+.neo-cursor.is-visible { opacity: 1 !important; }
+.neo-cursor::before { content: ""; position: absolute; inset: -8px; border: 1px dashed #d4b2ff; border-radius: 50%; animation: cosmic-cursor-orbit 5s linear infinite; }
+.neo-cursor::after { content: "✦"; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-54%); font: 16px/1 sans-serif; color: #fff; text-shadow: 0 0 8px #d6adff,0 0 17px #a66aff; animation: cosmic-star-pulse 2s ease-in-out infinite; }
+.neo-cursor-moon { position: absolute; width: 8px; height: 8px; right: -5px; top: 1px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px #d7b5ff,0 0 15px #a66aff; }
+.neo-cursor-label { position: absolute; left: 50%; top: calc(100% + 13px); transform: translateX(-50%); color: #ead8ff; font: 700 7px/1 sans-serif; letter-spacing: 1.8px; white-space: nowrap; opacity: 0; text-shadow: 0 0 9px #9c61ef; transition: opacity .2s ease; }
+.neo-cursor.is-hovering { width: 58px; height: 58px; border-color: #fff; background: radial-gradient(circle,#c99bff66,#8b4de544 62%,transparent 76%); box-shadow: 0 0 20px #b37aff,0 0 48px #8f4bdfcc,inset 0 0 18px #d6b2ff75; }
+.neo-cursor.is-hovering::before { inset: -10px; border-color: #f0ddff; }
+.neo-cursor.is-hovering .neo-cursor-label { opacity: 1; }
+.neo-cursor.is-clicking { width: 26px; height: 26px; box-shadow: 0 0 32px #c69aff,0 0 60px #8f4bdf; }
+.neo-cursor.is-clicking::after { content: "✧"; }
+.neo-cursor-trail { position: fixed; z-index: 2147483646; pointer-events: none; left: 0; top: 0; color: #e8d2ff; font: 12px/1 sans-serif; text-shadow: 0 0 8px #b47bff,0 0 15px #8742df; will-change: transform,opacity; animation: cosmic-trail-fade .72s ease-out forwards; }
 @keyframes cosmic-cursor-orbit { to { transform: rotate(360deg); } }
-@keyframes cosmic-star-pulse { 0%,100% { opacity:.78; transform:translate(-50%,-54%) scale(.85) rotate(0deg); } 50% { opacity:1; transform:translate(-50%,-54%) scale(1.2) rotate(45deg); } }
+@keyframes cosmic-star-pulse { 0%,100% { opacity:.82; transform:translate(-50%,-54%) scale(.9) rotate(0deg); } 50% { opacity:1; transform:translate(-50%,-54%) scale(1.25) rotate(45deg); } }
 @keyframes cosmic-trail-fade { 0% { opacity:.95; transform:translate(-50%,-50%) scale(1) rotate(0deg); } 100% { opacity:0; transform:translate(-50%,-85%) scale(.15) rotate(90deg); } }
-@media (hover:none),(pointer:coarse) { .neo-cursor,.neo-cursor-trail { display:none!important; } }
 @media (prefers-reduced-motion:reduce) { .neo-cursor::before,.neo-cursor::after { animation:none!important; } .neo-cursor-trail { animation-duration:.25s; } }

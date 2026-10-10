@@ -46,14 +46,14 @@ html.neo-custom-cursor *::before, html.neo-custom-cursor *::after {
   position: fixed; left: 0; top: 0; width: 42px; height: 42px;
   display: block !important; visibility: visible !important;
   z-index: 2147483647 !important; pointer-events: none !important; opacity: 0;
-  /* Use transform for pointer coordinates to avoid fixed-position/offset-parent drift. */
-  transform: translate3d(-50%, -50%, 0);
-  margin: 0 !important; padding: 0 !important; box-sizing: border-box;
+  /* Center the ring using negative margins; avoid transform-based coordinate offsets. */
+  transform: none !important;
+  margin: -21px 0 0 -21px !important; padding: 0 !important; box-sizing: border-box;
   border: 2px solid rgba(226,196,255,.98); border-radius: 50%;
   background: radial-gradient(circle,rgba(185,133,255,.5) 0%,rgba(133,73,224,.24) 48%,rgba(133,73,224,0) 75%);
   box-shadow: 0 0 15px #a866ff, 0 0 34px #8f4bdfb0, inset 0 0 16px #cba4ff80;
-  mix-blend-mode: normal; will-change: transform;
-  transition: opacity .12s ease,width .2s ease,height .2s ease,border-color .2s ease,box-shadow .2s ease;
+  mix-blend-mode: normal; will-change: left, top;
+  transition: opacity .12s ease,border-color .2s ease,box-shadow .2s ease;
 }
 .neo-cursor.is-visible { opacity: 1 !important; visibility: visible !important; }
 .neo-cursor::before { content: ""; position: absolute; inset: -8px; border: 1px dashed #d4b2ff; border-radius: 50%; animation: cosmic-cursor-orbit 5s linear infinite; }

@@ -3,778 +3,168 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#100b18">
-
-  <title>KnownAsNeo — Developer Portfolio</title>
-
+  <meta name="theme-color" content="#0b0b0f">
+  <meta name="description" content="KnownAsNeo — developer specializing in custom Minecraft Skript systems, server optimization, Discord bots, and web experiences.">
+  <meta property="og:title" content="KnownAsNeo — Developer & Systems Builder">
+  <meta property="og:description" content="Custom Skript development, Minecraft server systems, optimization, Discord bots, and web experiences by KnownAsNeo.">
+  <meta property="og:url" content="https://hyterion.xyz/">
+  <title>KnownAsNeo — Developer & Systems Builder</title>
   <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/favicon.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <!-- Animated background -->
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
-  <div class="ambient ambient-one" aria-hidden="true"></div>
-  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="KnownAsNeo home"><span class="brand-mark">N<span>✳</span></span><span>knownasneo<span class="accent">.</span></span></a>
+      <button class="menu" type="button" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span></button>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#about">About</a><a href="#expertise">Expertise</a><a href="#work">Selected work</a><a href="#services">Services</a><a href="#support">Support</a>
+        <a class="nav-cta" href="#contact">Let's talk <span>↗</span></a>
+      </nav>
+    </header>
 
-  <!-- Navigation -->
-  <header class="topbar">
-    <a class="brand" href="#home">
-      <span class="mark">N</span>KnownAsNeo<span class="purple">.</span>
-    </a>
-
-    <button class="menu" aria-label="Open menu" aria-expanded="false">
-      ☰
-    </button>
-
-    <nav>
-      <a href="#about">About</a>
-      <a href="#skills">Expertise</a>
-      <a href="#services">Services</a>
-      <a href="#projects">Projects</a>
-      <a class="navbutton" href="#contact">Let's talk ↗</a>
-    </nav>
-  </header>
-
-  <main>
-    <!-- Hero -->
-    <section class="hero wrap" id="home">
-      <div class="hero-copy">
-        <div class="eyebrow">
-          <i></i> BUILDING WORLDS, ONE SYSTEM AT A TIME
+    <main id="main">
+      <section class="hero" id="home">
+        <div class="hero-main">
+          <div class="eyebrow"><span class="status-dot"></span> DEVELOPER / SYSTEMS BUILDER <span class="eyebrow-line"></span> PH · GMT+8</div>
+          <h1>I build things<br>that <span class="serif-accent">work</span><span class="accent">.</span></h1>
+          <p class="hero-lede">I'm <strong>KnownAsNeo</strong> — a developer with <strong>2 years of hands-on experience</strong> building custom Minecraft systems, automations, and digital experiences that bring ideas to life.</p>
+          <div class="hero-actions"><a class="button button-primary" href="#work">Explore selected work <span>↘</span></a><a class="text-link" href="#contact">Have a project in mind? <span>↗</span></a></div>
+          <div class="hero-metrics"><div><strong>02<span>+</span></strong><span>Years building</span></div><div><strong>Systems</strong><span>Designed around people</span></div><div><strong>Always</strong><span>Learning by shipping</span></div></div>
         </div>
+        <aside class="profile-card" aria-label="Developer profile">
+          <div class="profile-top"><span class="mono-label">PROFILE / 001</span><span class="profile-status"><i></i> OPEN TO COLLABORATION</span></div>
+          <div class="profile-art"><div class="art-ring ring-one"></div><div class="art-ring ring-two"></div><div class="art-grid"></div><div class="avatar-frame"><img src="assets/minecraft-skin.png" alt="KnownAsNeo's Minecraft character" loading="eager"></div><span class="art-cross cross-one">+</span><span class="art-cross cross-two">+</span><span class="art-index">N / 26</span></div>
+          <div class="profile-name"><div><h2>KnownAsNeo</h2><p>Developer · Creator · Problem solver</p></div><span class="profile-symbol">✳</span></div>
+          <div class="profile-divider"></div>
+          <div class="profile-detail"><span>FOCUS</span><strong>Minecraft systems & web</strong></div>
+          <div class="profile-detail"><span>APPROACH</span><strong>Practical, iterative, player-first</strong></div>
+          <a class="profile-link" href="https://github.com/nathanielclintsuyod0-collab" target="_blank" rel="noopener noreferrer">Explore my GitHub <span>↗</span></a>
+        </aside>
+        <div class="hero-foot"><span>INDEPENDENT DEVELOPER</span><span>SCROLL TO EXPLORE <span class="scroll-arrow">↓</span></span></div>
+      </section>
 
-        <h1>
-          Hey, I'm<br>
-          <span class="gradient">KnownAsNeo</span><b>.</b>
-        </h1>
+      <section class="section intro-section" id="about">
+        <div class="section-label"><span>01</span> / A LITTLE ABOUT ME</div>
+        <div class="intro-grid"><h2>Curiosity is the<br>start. <span class="serif-accent">Building is the point.</span></h2><div class="intro-copy"><p>Over the past two years, I've focused on learning by creating real systems: from Minecraft server features and automation to community tools and web projects.</p><p>I care about the details people actually feel — reliable behavior, clear interfaces, maintainable logic, and experiences that make sense to use.</p><a class="text-link" href="#contact">Let's make something useful <span>↗</span></a></div></div>
+        <div class="principle-row"><article><span class="principle-number">01 /</span><h3>Build with purpose</h3><p>Every feature should solve a real problem or improve the experience.</p></article><article><span class="principle-number">02 /</span><h3>Make it maintainable</h3><p>Readable logic and thoughtful structure matter as much as the result.</p></article><article><span class="principle-number">03 /</span><h3>Keep iterating</h3><p>Test, learn from feedback, and refine until the details feel right.</p></article></div>
+      </section>
 
-        <div class="role-pill">
-          <span></span> BEGINNER DEVELOPER · ALWAYS LEARNING
+      <section class="section" id="expertise">
+        <div class="section-label"><span>02</span> / WHAT I WORK WITH</div>
+        <div class="section-heading"><h2>My kind of <span class="serif-accent">toolkit.</span></h2><p>My strongest experience is in Minecraft server systems, configuration, and automation, with growing work across web and Discord tooling.</p></div>
+        <div class="expertise-list">
+          <article class="expertise-item"><span class="expertise-index">01</span><div><h3>Minecraft server development</h3><p>Paper server setup, plugin ecosystems, permissions, crossplay, worlds, and ongoing maintenance.</p><div class="tags"><span>Paper</span><span>LuckPerms</span><span>Geyser</span><span>EssentialsX</span><span>WorldGuard</span></div></div><span class="expertise-arrow">↗</span></article>
+          <article class="expertise-item"><span class="expertise-index">02</span><div><h3>Custom gameplay & automation</h3><p>Player commands, event logic, economy features, dungeon concepts, rewards, and quality-of-life systems.</p><div class="tags"><span>Skript</span><span>MythicMobs</span><span>CoinsEngine</span><span>YAML</span></div></div><span class="expertise-arrow">↗</span></article>
+          <article class="expertise-item"><span class="expertise-index">03</span><div><h3>Discord & community tooling</h3><p>Bot workflows, store interactions, announcements, webhooks, and community-facing integrations.</p><div class="tags"><span>Node.js</span><span>JavaScript</span><span>Discord.js</span><span>DiscordSRV</span></div></div><span class="expertise-arrow">↗</span></article>
+          <article class="expertise-item"><span class="expertise-index">04</span><div><h3>Web & interface development</h3><p>Responsive frontends, practical UI improvements, website interactions, and API-connected features.</p><div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>REST APIs</span><span>GitHub</span></div></div><span class="expertise-arrow">↗</span></article>
         </div>
+      </section>
 
-        <h2>
-          Minecraft Server Developer <em>&amp;</em> Systems Builder
-        </h2>
-
-        <p>
-          I build custom Minecraft server experiences, configure plugins,
-          automate gameplay systems, and help communities turn big ideas
-          into playable worlds.
-        </p>
-
-        <div class="actions">
-          <a class="btn primary" href="#projects">
-            Explore my work <span>↘</span>
-          </a>
-          <a class="btn secondary" href="#contact">
-            Get in touch ↗
-          </a>
+      <section class="section" id="work">
+        <div class="section-label"><span>03</span> / SELECTED WORK</div>
+        <div class="section-heading"><h2>Projects with a <span class="serif-accent">purpose.</span></h2><p>A selection of communities, systems, and web projects I've worked on. Project descriptions focus on the work and its intent.</p></div>
+        <div class="project-grid">
+          <article class="project-card project-featured"><div class="project-visual visual-seraph"><span class="visual-overline">COMMUNITY / GAME SYSTEMS</span><div class="seraph-wordmark">SERAPHYX<span>SMP ✳</span></div><div class="visual-bottom"><span>01 — SERVER NETWORK</span><span>PH / CROSSPLAY</span></div></div><div class="project-body"><div class="project-meta"><span>01 / 04</span><span>ONGOING PROJECT</span></div><h3>Seraphyx SMP</h3><p>A community-driven Minecraft network focused on custom gameplay, progression, permissions, crossplay, and a consistent player experience.</p><div class="tags"><span>Paper</span><span>Skript</span><span>Geyser</span><span>LuckPerms</span></div><a class="text-link" href="https://discord.gg/seraphyx" target="_blank" rel="noopener noreferrer">Explore community <span>↗</span></a></div></article>
+          <article class="project-card"><div class="project-visual visual-launcher"><span class="visual-overline">COMMUNITY TOOLING</span><div class="launcher-mark">N<span>✳</span></div><strong>SERAPHYX LAUNCHER</strong><span class="visual-caption">A community download experience</span><div class="visual-bottom"><span>02 — DISTRIBUTION</span><span>UTILITY</span></div></div><div class="project-body"><div class="project-meta"><span>02 / 04</span><span>COMMUNITY PROJECT</span></div><h3>Seraphyx Launcher</h3><p>A launcher distribution project for the Seraphyx community, helping players access the community's Minecraft setup.</p><div class="tags"><span>Launcher</span><span>Community</span></div><a class="text-link" href="https://drive.google.com/uc?export=download&amp;id=1gy6aNi7TdKsRIuaGIVWTY5ySuyuD6FTw" target="_blank" rel="noopener noreferrer">View download <span>↗</span></a></div></article>
+          <article class="project-card"><div class="project-visual visual-store"><span class="visual-overline">WEB / COMMERCE</span><div class="store-window"><div class="store-window-top"><i></i><i></i><i></i><span>HYTERION / STORE</span></div><div class="store-window-content"><span>CURATED DIGITAL GOODS</span><strong>Hyterion<br>Store<span class="accent">.</span></strong><div class="store-bars"><i></i><i></i><i></i></div></div></div><div class="visual-bottom"><span>03 — WEB PROJECT</span><span>DIGITAL</span></div></div><div class="project-body"><div class="project-meta"><span>03 / 04</span><span>WEB PROJECT</span></div><h3>Hyterion Store</h3><p>An online store project exploring digital presentation and a clear path from discovery to product information.</p><div class="tags"><span>Web</span><span>UI</span><span>Commerce</span></div><a class="text-link" href="https://hyterion.store/" target="_blank" rel="noopener noreferrer">Visit website <span>↗</span></a></div></article>
+          <article class="project-card"><div class="project-visual visual-wisteria"><span class="visual-overline">CREATIVE COMMUNITY</span><div class="wisteria-emblem">W<span>✳</span></div><strong>WISTERIA STUDIO</strong><span class="visual-caption">Community · Creativity · Collaboration</span><div class="visual-bottom"><span>04 — COMMUNITY</span><span>STUDIO</span></div></div><div class="project-body"><div class="project-meta"><span>04 / 04</span><span>COMMUNITY PROJECT</span></div><h3>Wisteria Studio</h3><p>A creative community project centered around shared interests, collaboration, and community participation.</p><div class="tags"><span>Community</span><span>Discord</span></div><a class="text-link" href="https://discord.gg/anjQmPUqED" target="_blank" rel="noopener noreferrer">Visit community <span>↗</span></a></div></article>
         </div>
+        <p class="small-note">Project status and descriptions may evolve. Ask me about my specific contributions to any project.</p>
+      </section>
 
-        <div class="facts">
-          <div>
-            <b>Beginner</b>
-            <small>Software Developer</small>
-          </div>
-          <div>
-            <b>Custom</b>
-            <small>Skript Builder</small>
-          </div>
-          <div>
-            <b>Always</b>
-            <small>Learning</small>
-          </div>
-        </div>
-      </div>
-
-      <div class="art">
-        <div class="orbit"></div>
-        <div class="orbit orbit2"></div>
-
-        <div class="terminal-card">
-          <div class="window">
-            <span>● ● ●</span>
-            <small>NEO / BUILD LOG</small>
-            <label>● AVAILABLE</label>
-          </div>
-
-          <div class="monogram">N<span>✦</span></div>
-
-          <div class="code">
-            <div><span>neo@seraphyx</span>:~$ build --experience</div>
-            <p>Loading custom systems...</p>
-            <p class="ok">✓ Plugins configured</p>
-            <p class="ok">✓ Gameplay systems ready</p>
-            <p class="ok">✓ Community connected</p>
-            <p class="cursor">▌</p>
-          </div>
-
-          <footer>
-            CRAFTED WITH CURIOSITY
-            <span>PH · GMT+8</span>
-          </footer>
-        </div>
-
-        <img
-          class="skin-character"
-          src="assets/minecraft-skin.png"
-          alt="KnownAsNeo Minecraft character skin"
-          loading="eager"
-        >
-
-        <div class="float f1">⌘ Custom systems</div>
-        <div class="float f2">✦ Minecraft</div>
-      </div>
-
-      <a class="scroll" href="#about">— SCROLL TO EXPLORE</a>
-    </section>
-
-    <!-- About -->
-    <section class="wrap section" id="about">
-      <div class="kicker">01 / A LITTLE ABOUT ME</div>
-
-      <div class="heading">
-        <h2>
-          Turning ideas into<br>
-          <span class="gradient">real experiences.</span>
-        </h2>
-
-        <p>
-          I enjoy solving technical problems and building systems that make
-          servers feel unique, polished, and fun to play.
-        </p>
-      </div>
-
-      <div class="about-grid">
-        <article class="panel">
-          <div class="icon">⌘</div>
-          <h3>My journey</h3>
-
-          <p>
-            What started as a love for Minecraft grew into a passion for
-            server development, plugin configuration, automation, and
-            community building.
-          </p>
-
-          <p>
-            My focus is practical: reliable setups, thoughtful gameplay,
-            clear player experiences, and maintainable configurations.
-          </p>
-
-          <a class="textlink" href="#contact">
-            Have a project in mind? ↗
-          </a>
-        </article>
-
-        <div class="principles">
-          <article>
-            <span>01</span>
-            <div>
-              <h3>Built with purpose</h3>
-              <p>
-                Every feature should make the player experience better—not
-                just add complexity.
-              </p>
-            </div>
+      <section class="section services-section" id="services">
+        <div class="section-label"><span>04</span> / SERVICES & PRICING</div>
+        <div class="section-heading"><h2>Built with purpose. <span class="serif-accent">Priced clearly.</span></h2><p>Practical starting ranges in Philippine pesos. Skript systems are my specialty — each quote reflects the logic, integrations, testing, and support involved, not just line count.</p></div>
+        <div class="service-grid service-grid-pricing">
+          <article class="service-card">
+            <div class="service-card-top"><span>01 / PERFORMANCE</span><span class="service-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5 9 12l3.5 3.5L20 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.5 7H20v4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <h3>Server Optimization</h3><p>Performance checks, configuration tuning, plugin conflict review, and practical recommendations for smoother gameplay.</p>
+            <div class="service-price"><span>PROJECT RANGE</span><strong>₱400–₱1,500</strong><small>per optimization</small></div>
+            <a href="#contact" data-service="Server Optimization" data-service-price="₱400–₱1,500">Optimize my server <span aria-hidden="true">↗</span></a>
           </article>
-
-          <article>
-            <span>02</span>
-            <div>
-              <h3>Always improving</h3>
-              <p>
-                I keep experimenting, learning, testing, and refining my
-                approach.
-              </p>
+          <article class="service-card service-card-featured">
+            <div class="service-card-top"><span>02 / SPECIALTY SERVICE</span><span class="service-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <span class="service-featured-label">NEO'S SPECIALTY</span><h3>Custom Skript Development</h3><p>Purpose-built commands, events, GUI flows, economy systems, custom mechanics, and plugin integrations.</p>
+            <div class="skript-tiers" aria-label="Skript development price tiers">
+              <div><span>Small · 1–100 lines</span><strong>₱150–₱500</strong></div>
+              <div><span>Medium · 101–300 lines</span><strong>₱500–₱1,200</strong></div>
+              <div><span>Large · 301–700 lines</span><strong>₱1,200–₱2,500</strong></div>
+              <div><span>Advanced · 701+ lines</span><strong>Custom quote</strong></div>
             </div>
+            <a href="#contact" data-service="Custom Skript Development" data-service-price="₱150–₱500 for 1–100 lines; larger systems priced by scope">Request a Skript <span aria-hidden="true">↗</span></a>
           </article>
-
-          <article>
-            <span>03</span>
-            <div>
-              <h3>Community matters</h3>
-              <p>
-                Great server systems support a welcoming and well-managed
-                community.
-              </p>
-            </div>
+          <article class="service-card">
+            <div class="service-card-top"><span>03 / SERVER INFRASTRUCTURE</span><span class="service-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3.5" width="16" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="14.5" width="16" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 6.5h.01M7.5 17.5h.01M11 6.5h5M11 17.5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+            <h3>Minecraft Server Setup</h3><p>Server foundation, core plugin configuration, permissions, essential settings, and a clean handover checklist.</p>
+            <div class="service-price"><span>PROJECT RANGE</span><strong>₱2,500–₱4,500</strong><small>per setup</small></div>
+            <a href="#contact" data-service="Minecraft Server Setup" data-service-price="₱2,500–₱4,500">Plan my server <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="service-card">
+            <div class="service-card-top"><span>04 / TROUBLESHOOTING</span><span class="service-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m14.5 6.5 3-3a5 5 0 0 1-6.2 6.2L6 15a2.1 2.1 0 1 0 3 3l5.3-5.3a5 5 0 0 1 6.2-6.2l-3 3-3-3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <h3>Bug Fixes & Debugging</h3><p>Trace errors, repair broken scripts or plugin configurations, and explain the fix with clear next steps.</p>
+            <div class="service-price"><span>PROJECT RANGE</span><strong>₱300–₱1,500</strong><small>per issue</small></div>
+            <a href="#contact" data-service="Fixes and Debugging" data-service-price="₱300–₱1,500">Fix an issue <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="service-card">
+            <div class="service-card-top"><span>05 / ONGOING CARE</span><span class="service-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 7v5h-5M4 17v-5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 9A7 7 0 0 1 17 5l3 7M4 12l3 7a7 7 0 0 0 11.5-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <h3>Server Maintenance</h3><p>Scheduled health checks, backups review, routine updates, and agreed small configuration changes.</p>
+            <div class="service-price"><span>MONTHLY PLAN</span><strong>₱800–₱2,500</strong><small>per month</small></div>
+            <a href="#contact" data-service="Maintenance" data-service-price="₱800–₱2,500 per month">Discuss a plan <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="service-card">
+            <div class="service-card-top"><span>06 / WEB & INTERFACE</span><span class="service-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01M7 13h4M7 16h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+            <h3>Web Development</h3><p>Responsive landing pages, portfolios, polished UI sections, and lightweight interactive experiences.</p>
+            <div class="service-price"><span>PROJECT RANGE</span><strong>₱800–₱3,500+</strong><small>per website</small></div>
+            <a href="#contact" data-service="Web Development" data-service-price="₱800–₱3,500+">Start a website <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="service-card">
+            <div class="service-card-top"><span>07 / COMMUNITY TOOLS</span><span class="service-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 9.5h8a4 4 0 0 1 3.8 2.8l1 3.1a2 2 0 0 1-3.2 2.1L14.8 15H9.2l-2.8 2.5a2 2 0 0 1-3.2-2.1l1-3.1A4 4 0 0 1 8 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 12v3M6.5 13.5h3M16.5 12.5h.01M18 14h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+            <h3>Discord Bot Development</h3><p>Slash commands, moderation utilities, embeds, support flows, and custom community automation.</p>
+            <div class="service-price"><span>PROJECT RANGE</span><strong>₱500–₱3,000+</strong><small>by feature scope</small></div>
+            <a href="#contact" data-service="Discord Bot Development" data-service-price="₱500–₱3,000+">Build a bot <span aria-hidden="true">↗</span></a>
           </article>
         </div>
-      </div>
-    </section>
+        <div class="pricing-footnote"><span class="pricing-footnote-mark" aria-hidden="true">i</span><p><strong>How pricing works</strong> Line count is a guide, not a strict measure of effort. Complex logic, third-party integrations, compatibility requirements, urgency, testing, and revisions can change the quote. Hosting, paid plugins, domains, and other third-party costs are separate unless agreed beforehand.</p></div>
+      </section>
 
-    <!-- Expertise -->
-    <section class="wrap section" id="skills">
-      <div class="kicker">02 / WHAT I DO</div>
-
-      <div class="heading">
-        <h2>
-          My areas of<br>
-          <span class="gradient">expertise.</span>
-        </h2>
-
-        <p>
-          From the server console to the player-facing details, I enjoy
-          building the pieces that bring a Minecraft network together.
-        </p>
-      </div>
-
-      <div class="skills">
-        <article class="skill">
-          <span class="skill-icon">⚙</span>
-          <small>01</small>
-          <h3>Server Configuration</h3>
-          <p>
-            Paper setup, plugin configuration, permissions, worlds, and
-            performance-minded maintenance.
-          </p>
-          <div class="tags">
-            <span>Paper</span>
-            <span>LuckPerms</span>
-            <span>Essentials</span>
-          </div>
-        </article>
-
-        <article class="skill">
-          <span class="skill-icon">⌘</span>
-          <small>02</small>
-          <h3>Skript &amp; Automation</h3>
-          <p>
-            Custom commands, events, reward systems, quality-of-life
-            features, and gameplay automation.
-          </p>
-          <div class="tags">
-            <span>Skript</span>
-            <span>Events</span>
-            <span>Custom logic</span>
-          </div>
-        </article>
-
-        <article class="skill">
-          <span class="skill-icon">◇</span>
-          <small>03</small>
-          <h3>Gameplay Systems</h3>
-          <p>
-            Progression, economy features, quests, crates, rank systems,
-            and player-focused mechanics.
-          </p>
-          <div class="tags">
-            <span>Economy</span>
-            <span>Progression</span>
-          </div>
-        </article>
-
-        <article class="skill">
-          <span class="skill-icon">◎</span>
-          <small>04</small>
-          <h3>Discord Integration</h3>
-          <p>
-            Community tooling, server announcements, DiscordSRV setup,
-            and workflow automation.
-          </p>
-          <div class="tags">
-            <span>DiscordSRV</span>
-            <span>Webhooks</span>
-          </div>
-        </article>
-
-        <article class="skill">
-          <span class="skill-icon">▤</span>
-          <small>05</small>
-          <h3>Menus &amp; UX</h3>
-          <p>
-            Organized menus, readable messages, consistent styling,
-            and intuitive player flows.
-          </p>
-          <div class="tags">
-            <span>DeluxeMenus</span>
-            <span>UI</span>
-          </div>
-        </article>
-
-        <article class="skill">
-          <span class="skill-icon">⌁</span>
-          <small>06</small>
-          <h3>Troubleshooting</h3>
-          <p>
-            Reading logs, tracking down configuration conflicts, and
-            iterating toward stable solutions.
-          </p>
-          <div class="tags">
-            <span>Debugging</span>
-            <span>Testing</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Services and fees -->
-    <section class="wrap section" id="services">
-      <div class="kicker">03 / SERVICES &amp; STARTER FEES</div>
-
-      <div class="heading">
-        <h2>
-          Small projects,<br>
-          <span class="gradient">clear pricing.</span>
-        </h2>
-
-        <p>
-          Beginner-friendly rates for simple tasks. Final pricing depends
-          on scope, complexity, and testing time.
-        </p>
-      </div>
-
-      <div class="services-grid">
-        <article class="service-card">
-          <div class="service-top">
-            <span>01</span>
-            <span class="service-symbol">⚙</span>
-          </div>
-          <h3>Basic Server Setup</h3>
-          <p>Minecraft server setup and basic configuration.</p>
-          <div class="price">₱700–₱1,880 <small>/ setup</small></div>
-          <div class="tags">
-            <span>Paper</span>
-            <span>Plugins</span>
-          </div>
-        </article>
-
-        <article class="service-card">
-          <div class="service-top">
-            <span>02</span>
-            <span class="service-symbol">⌘</span>
-          </div>
-          <h3>Simple Skript</h3>
-          <p>
-            Small quality-of-life commands through to larger custom
-            dungeon systems.
-          </p>
-          <div class="price">₱150–₱2,000 <small>/ script</small></div>
-          <div class="tags">
-            <span>Skript</span>
-            <span>Testing</span>
-          </div>
-        </article>
-
-        <article class="service-card">
-          <div class="service-top">
-            <span>03</span>
-            <span class="service-symbol">▤</span>
-          </div>
-          <h3>Menu / GUI Setup</h3>
-          <p>A menu with organized options, commands, or actions.</p>
-          <div class="price">₱100–₱880 <small>/ menu</small></div>
-          <div class="tags">
-            <span>DeluxeMenus</span>
-            <span>UX</span>
-          </div>
-        </article>
-
-        <article class="service-card">
-          <div class="service-top">
-            <span>04</span>
-            <span class="service-symbol">◎</span>
-          </div>
-          <h3>Discord Setup</h3>
-          <p>
-            Basic channel structure, announcement formatting,
-            or webhook setup.
-          </p>
-          <div class="price">₱100 <small>/ task</small></div>
-          <div class="tags">
-            <span>Discord</span>
-            <span>Webhooks</span>
-          </div>
-        </article>
-
-        <article class="service-card service-custom">
-          <div class="service-top">
-            <span>05</span>
-            <span class="service-symbol">✦</span>
-          </div>
-          <h3>Custom Feature / Fix</h3>
-          <p>
-            Larger systems, complex bugs, or tasks that need a discussion
-            before work begins.
-          </p>
-          <div class="price">Let's discuss</div>
-          <div class="tags">
-            <span>Quoted individually</span>
-          </div>
-        </article>
-      </div>
-
-      <p class="note">
-        Starter rates are estimates, not a promise of professional-grade
-        delivery. Scope and price will be confirmed before starting.
-      </p>
-    </section>
-
-    <!-- Selected work -->
-    <section class="wrap section" id="projects">
-      <div class="kicker">04 / SELECTED WORK</div>
-
-      <div class="heading">
-        <h2>
-          Projects &amp;<br>
-          <span class="gradient">experiments.</span>
-        </h2>
-
-        <p>
-          A snapshot of the projects and communities associated with my
-          work. Visit the links below to learn more.
-        </p>
-      </div>
-
-      <div class="projects">
-        <!-- Seraphyx SMP -->
-        <article class="project featured">
-          <div class="visual seraph">
-            <div class="stars">✦　·　✧　·　✦</div>
-            <strong>
-              SERAPHYX
-              <small>S M P</small>
-            </strong>
-            <div class="caption">
-              A COMMUNITY-DRIVEN MINECRAFT WORLD
-            </div>
-          </div>
-
-          <div class="project-info">
-            <div class="meta">
-              SERVER NETWORK
-              <span>01 / 04</span>
-            </div>
-
-            <h3>Seraphyx SMP</h3>
-
-            <p>
-              Server configuration, custom gameplay systems, permissions,
-              crossplay support, and community features for a Minecraft
-              SMP experience.
-            </p>
-
-            <div class="tags">
-              <span>Paper</span>
-              <span>Skript</span>
-              <span>Geyser</span>
-              <span>LuckPerms</span>
-            </div>
-
-            <a
-              class="textlink"
-              href="https://discord.com/invite/vHGj4E9KDZ"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Explore community ↗
-            </a>
-          </div>
-        </article>
-
-        <!-- Seraphyx Launcher -->
-        <article class="project">
-          <div class="visual launcher-visual">
-            <div class="launcher-icon">N<span>✦</span></div>
-            <div class="launcher-label">SERAPHYX LAUNCHER</div>
-            <small>COMMUNITY DOWNLOAD</small>
-          </div>
-
-          <div class="project-info">
-            <div class="meta">
-              DOWNLOADABLE PROJECT
-              <span>02 / 04</span>
-            </div>
-
-            <h3>Seraphyx Launcher</h3>
-
-            <p>
-              A launcher download for the Seraphyx community. Only
-              download and run software you trust.
-            </p>
-
-            <div class="tags">
-              <span>Launcher</span>
-              <span>Seraphyx</span>
-              <span>Google Drive</span>
-            </div>
-
-            <a
-              class="textlink"
-              href="https://drive.google.com/uc?export=download&amp;id=1gy6aNi7TdKsRIuaGIVWTY5ySuyuD6FTw"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Download launcher ↗
-            </a>
-
-            <p class="mini-note">
-              Google Drive sharing must be set to “Anyone with the link”
-              for public access.
-            </p>
-          </div>
-        </article>
-
-        <!-- Hyterion Store -->
-        <article class="project">
-          <div class="visual systems">
-            <div class="orb"></div>
-            <div class="orb orb-small"></div>
-            <code>hyterion.store<br>↗ online</code>
-          </div>
-
-          <div class="project-info">
-            <div class="meta">
-              WEB PROJECT
-              <span>03 / 04</span>
-            </div>
-
-            <h3>Hyterion Store</h3>
-
-            <p>
-              An online store project. Visit the website to explore its
-              design, features, and available offerings.
-            </p>
-
-            <div class="tags">
-              <span>Web</span>
-              <span>E-commerce</span>
-              <span>Website</span>
-            </div>
-
-            <a
-              class="textlink"
-              href="https://hyterion.store/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Visit website ↗
-            </a>
-          </div>
-        </article>
-
-        <!-- Wisteria Studio -->
-        <article class="project">
-          <div class="visual community">
-            <div class="discord-window">
-              <span>● ● ●</span>
-              <div class="avatar">W</div>
-              <div class="lines">
-                <i></i>
-                <i></i>
-                <i></i>
-              </div>
-              <div class="bubble">
-                Wisteria Studio <b>✦</b>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-info">
-            <div class="meta">
-              COMMUNITY PROJECT
-              <span>04 / 04</span>
-            </div>
-
-            <h3>Wisteria Studio</h3>
-
-            <p>
-              A creative community project. Join the Discord server to
-              learn more about Wisteria Studio and its work.
-            </p>
-
-            <div class="tags">
-              <span>Wisteria Studio</span>
-              <span>Discord</span>
-              <span>Community</span>
-            </div>
-
-            <a
-              class="textlink"
-              href="https://discord.gg/anjQmPUqED"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Join Wisteria Studio ↗
-            </a>
-          </div>
-        </article>
-      </div>
-
-      <p class="note">
-        Keep project descriptions accurate to your own role and contributions.
-      </p>
-    </section>
-
-    <!-- Call to action -->
-    <section class="callout">
-      <div class="wrap callout-inner">
-        <div>
-          <div class="kicker">05 / YOUR IDEA, NEXT</div>
-
-          <h2>
-            Let's build something<br>
-            <span class="gradient">worth logging into.</span>
-          </h2>
-
-          <p>
-            Need help with a Minecraft server or have a project idea?
-            Let's talk about it.
-          </p>
+      <section class="section monetization-section" id="support">
+        <div class="section-label"><span>05</span> / SUPPORT INDEPENDENT WORK</div>
+        <div class="section-heading"><h2>Good work grows with <span class="serif-accent">support.</span></h2><p>Support helps fund time for experiments, open-source utilities, and better community projects. All contributions are optional.</p></div>
+        <div class="monetization-grid">
+          <article class="money-card money-support">
+            <span class="money-kicker">OPTIONAL SUPPORT</span><div class="money-symbol">✳</div><h3>Buy me a coffee</h3><p>Choose a contribution amount and contact me for the current GCash details. Payments are verified manually; this site does not collect payment credentials.</p>
+            <div class="support-amounts" role="group" aria-label="Suggested support amounts"><button type="button" data-support-amount="50">₱50</button><button type="button" data-support-amount="100">₱100</button><button type="button" data-support-amount="250">₱250</button><button type="button" data-support-amount="custom">Custom</button></div>
+            <p class="support-selection" id="supportSelection" aria-live="polite">Selected: ₱100 contribution</p>
+            <a class="button button-primary money-cta" href="#contact" data-support-contact>Request GCash details <span>↗</span></a>
+            <span class="money-footnote">No automatic payment or instant confirmation.</span>
+          </article>
+          <article class="money-card money-sponsor">
+            <span class="money-kicker">BRAND / CREATOR PARTNERSHIPS</span><div class="sponsor-art"><span>PARTNER</span><strong>Make something<br><em>memorable.</em></strong><i>✳</i></div><h3>Sponsored placements</h3><p>Have a Minecraft tool, hosting service, or creator project relevant to this audience? Ask about a clearly labelled sponsored feature or collaboration.</p>
+            <a class="text-link" href="#contact" data-sponsor-contact>Discuss a partnership <span>↗</span></a>
+            <span class="money-footnote">Sponsored content will be disclosed. No ad network is active yet.</span>
+          </article>
         </div>
+        <p class="small-note money-disclaimer">Support is voluntary and does not guarantee a service, product, rank, or special access. Commissioned work is quoted and agreed separately before payment.</p>
+      </section>
+      <section class="contact-section" id="contact"><div class="section-label"><span>06</span> / YOUR IDEA, NEXT</div><div class="contact-layout"><div><h2>Let's build<br>something <span class="serif-accent">useful.</span></h2><p>Have a server feature, automation idea, or web project in mind? Share the goal and we'll work out a practical next step.</p><div class="contact-socials"><a href="https://github.com/nathanielclintsuyod0-collab" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a><a href="https://discord.gg/seraphyx" target="_blank" rel="noopener noreferrer">Discord <span>↗</span></a><a href="https://www.facebook.com/profile.php?id=61582231886418" target="_blank" rel="noopener noreferrer">Facebook <span>↗</span></a></div></div><form id="contactForm"><div class="form-heading"><span>NEW MESSAGE</span><span><i></i> READY</span></div><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required placeholder="What should I call you?"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"><label for="topic">What is this about?</label><select id="topic" name="topic"><option>Server development</option><option>Server Optimization</option><option>Minecraft Server Setup</option><option>Custom Skript Development</option><option>Fixes and Debugging</option><option>Maintenance</option><option>Skript / custom systems</option><option>Plugin configuration</option><option>Discord Bot Development</option><option>Discord tooling</option><option>Web Development</option><option>Website development</option><option>Support / GCash contribution</option><option>Sponsorship / advertising partnership</option><option>Collaboration</option><option>Something else</option></select><label for="message">A little about your idea</label><textarea id="message" name="message" rows="4" required placeholder="What would you like to build?"></textarea><button class="button button-primary" type="submit">Prepare email <span>↗</span></button><p class="form-note">Opens your email app. This site does not store contact form submissions.</p></form></div></section>
+    </main>
 
-        <a class="btn primary" href="#contact">
-          Contact KnownAsNeo ↗
-        </a>
-      </div>
-    </section>
+    <footer class="footer"><a class="brand" href="#home"><span class="brand-mark">N<span>✳</span></span><span>knownasneo<span class="accent">.</span></span></a><p>Built with intent. Improved one iteration at a time.</p><a class="back-top" href="#home">BACK TO TOP ↑</a><div class="copyright">© <span id="year"></span> KnownAsNeo · hyterion.xyz</div></footer>
+  </div>
 
-    <!-- Contact -->
-    <section class="wrap section contact" id="contact">
-      <div class="kicker">06 / GET IN TOUCH</div>
-
-      <div class="contact-grid">
-        <div>
-          <h2>
-            Have a project?<br>
-            <span class="gradient">Let's connect.</span>
-          </h2>
-
-          <p>
-            For server development, configuration help, collaborations,
-            or questions, reach out through one of the channels below.
-          </p>
-
-          <div class="contact-links">
-            <a
-              href="https://discord.com/invite/vHGj4E9KDZ"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>◈</span>
-              <div>
-                <small>DISCORD COMMUNITY</small>
-                <b>Seraphyx SMP ↗</b>
-              </div>
-            </a>
-
-            <a
-              href="https://github.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>⌘</span>
-              <div>
-                <small>CODE &amp; PROJECTS</small>
-                <b>GitHub ↗</b>
-              </div>
-            </a>
-
-            <a
-              href="https://www.facebook.com/profile.php?id=61582231886418"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>f</span>
-              <div>
-                <small>FACEBOOK</small>
-                <b>Facebook profile ↗</b>
-              </div>
-            </a>
-
-            <a href="https://discordapp.com/users/1250465439532712038">
-              <span>◎</span>
-              <div>
-                <small>DISCORD USERNAME</small>
-                <b>neowwwaw ⧉</b>
-              </div>
-            </a>
-          </div>
-
-          <p class="hint" id="hint">
-            Replace the GitHub profile, Discord username, and email
-            before publishing.
-          </p>
-        </div>
-
-        <form id="contactForm">
-          <div class="formtop">
-            NEW MESSAGE <span>● READY</span>
-          </div>
-
-          <label for="name">Your name</label>
-          <input
-            id="name"
-            name="name"
-            required
-            placeholder="What should I call you?"
-          >
-
-          <label for="email">Email address</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            placeholder="you@example.com"
-          >
-
-          <label for="topic">Topic</label>
-          <select id="topic" name="topic">
-            <option>Server development</option>
-            <option>Plugin configuration</option>
-            <option>Skript / custom systems</option>
-            <option>Collaboration</option>
-            <option>Something else</option>
-          </select>
-
-          <label for="message">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            rows="4"
-            required
-            placeholder="Tell me a little about your idea..."
-          ></textarea>
-
-          <button class="btn primary" type="submit">
-            Prepare email ↗
-          </button>
-
-          <p class="hint">
-            Opens your email app. This site does not store submissions.
-          </p>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="wrap foot">
-      <a class="brand" href="#home">
-        <span class="mark">N</span>KnownAsNeo<span class="purple">.</span>
-      </a>
-
-      <span>Designed with curiosity. Built one block at a time.</span>
-
-      <a href="#home">BACK TO TOP ↑</a>
-    </div>
-
-    <div class="copyright">
-      © <span id="year"></span> KnownAsNeo. All rights reserved.
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+  <button class="ai-launcher" id="aiLauncher" type="button" aria-label="Chat with Neo AI" aria-expanded="false"><span class="ai-launcher-spark">✳</span><span class="ai-launcher-label">Ask Neo AI</span><span class="ai-launcher-dot"></span></button>
+  <section class="ai-panel" id="aiPanel" aria-label="Neo AI portfolio assistant" aria-hidden="true">
+    <header class="ai-header"><div class="ai-avatar">N<span>✳</span></div><div class="ai-header-copy"><strong>Neo AI</strong><span><i></i> Portfolio assistant</span></div><button class="ai-close" id="aiClose" type="button" aria-label="Close assistant">×</button></header>
+    <div class="ai-intro" id="aiIntro"><span class="ai-kicker">KNOWNASNEO / AI</span><h2>Hey there.<br>What would you like to know?</h2><p>Ask me about Neo's projects, skills, or development experience.</p><div class="ai-suggestions"><button type="button">What does Neo build?</button><button type="button">Tell me about Seraphyx</button><button type="button">What technologies does he use?</button></div></div>
+    <div class="ai-messages" id="aiMessages" aria-live="polite" aria-relevant="additions text"></div>
+    <form class="ai-form" id="aiForm"><label class="sr-only" for="aiInput">Message Neo AI</label><textarea id="aiInput" rows="1" maxlength="1200" placeholder="Ask about my work..." required></textarea><button type="submit" aria-label="Send message"><span>↑</span></button><p>AI-generated answers can be imperfect. No secrets or private information are shared.</p></form>
+  </section>
+  <script src="script.js" defer></script>
 </body>
 </html>

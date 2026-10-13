@@ -14,6 +14,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
   }
 
+  // Keep the current section reflected in the navigation for clearer orientation.
+  const navLinks = Array.from(document.querySelectorAll('.nav a[href^="#"]'));
+  const navSections = navLinks
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+  if ('IntersectionObserver' in window && navSections.length) {
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => {
+          const active = link.getAttribute('href') === '#' + entry.target.id;
+          if (active) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-28% 0px -58% 0px', threshold: 0 });
+    navSections.forEach(section => sectionObserver.observe(section));
+  }
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menu && nav?.classList.contains('open')) {
+      nav.classList.remove('open');
+      menu.setAttribute('aria-expanded', 'false');
+      menu.focus();
+    }
+  });
+
   const year = document.querySelector('#year');
   if (year) year.textContent = new Date().getFullYear();
 

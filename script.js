@@ -36,6 +36,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+
+  // Manual support flow: selection only prepares a contact request; no payment is processed here.
+  const supportSelection = document.getElementById('supportSelection');
+  const supportButtons = document.querySelectorAll('[data-support-amount]');
+  const supportContact = document.querySelector('[data-support-contact]');
+  let selectedSupport = '100';
+  supportButtons.forEach(button => {
+    button.setAttribute('aria-pressed', String(button.dataset.supportAmount === selectedSupport));
+    button.addEventListener('click', () => {
+      selectedSupport = button.dataset.supportAmount || '100';
+      supportButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      if (supportSelection) supportSelection.textContent = selectedSupport === 'custom'
+        ? 'Selected: custom contribution — please mention your amount'
+        : 'Selected: ₱' + selectedSupport + ' contribution';
+      if (supportContact) supportContact.href = '#contact';
+    });
+  });
+  supportContact?.addEventListener('click', () => {
+    const topic = document.getElementById('topic');
+    const message = document.getElementById('message');
+    if (topic) topic.value = 'Support / GCash contribution';
+    if (message) message.value = selectedSupport === 'custom'
+      ? 'I would like to support your work with a custom contribution. Please share the current GCash payment instructions.'
+      : 'I would like to support your work with a ₱' + selectedSupport + ' contribution. Please share the current GCash payment instructions.';
+  });
+  document.querySelector('[data-sponsor-contact]')?.addEventListener('click', () => {
+    const topic = document.getElementById('topic');
+    const message = document.getElementById('message');
+    if (topic) topic.value = 'Sponsorship / advertising partnership';
+    if (message) message.value = 'I would like to discuss a clearly disclosed sponsorship or advertising partnership. Here is my idea: ';
+  });
+
   const revealItems = document.querySelectorAll('.section-label, .intro-grid, .principle-row article, .expertise-item, .project-card, .service-grid article, .contact-layout');
   if (reduceMotion || !('IntersectionObserver' in window)) {
     revealItems.forEach(el => el.classList.add('is-visible'));

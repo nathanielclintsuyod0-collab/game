@@ -56,7 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Replace this placeholder with your deployed Netlify function URL.
   // Example: https://your-site.netlify.app/.netlify/functions/chat
-  const AI_API_URL = 'https://YOUR-NETLIFY-SITE.netlify.app/.netlify/functions/chat';
+  const NETLIFY_FUNCTION_URL = 'https://YOUR-NETLIFY-SITE.netlify.app/.netlify/functions/chat';
+  const AI_API_URL = window.location.hostname.endsWith('.netlify.app')
+    ? '/.netlify/functions/chat'
+    : NETLIFY_FUNCTION_URL;
 
   // Neo AI assistant: the OpenAI API key stays on the server.
   const launcher = document.getElementById('aiLauncher');

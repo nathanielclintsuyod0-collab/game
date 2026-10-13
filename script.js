@@ -44,25 +44,81 @@ document.addEventListener('DOMContentLoaded', () => {
   const year = document.querySelector('#year');
   if (year) year.textContent = new Date().getFullYear();
 
+  // Direct contact form submission via Formspree (no mail app required).
+  // Replace this public form ID with the ID shown in your Formspree dashboard.
+  const FORMSPREE_FORM_ID = 'YOUR_FORMSPREE_FORM_ID';
   const contactForm = document.querySelector('#contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', event => {
-      event.preventDefault();
-      const get = id => document.getElementById(id)?.value.trim() || '';
-      const name = get('name');
-      const email = get('email');
-      const topic = get('topic');
-      const message = get('message');
-      const recipient = 'neowawww@gmail.com';
-      if (!recipient || recipient === 'YOUR_EMAIL@example.com') {
-        alert('The contact form is ready, but the owner needs to set a real contact email in script.js before publishing.');
-        return;
-      }
-      const body = message + '\n\nFrom: ' + name + '\nReply to: ' + email;
-      window.location.href = 'mailto:' + recipient + '?subject=' + encodeURIComponent('[Hyterion portfolio] ' + topic + ' — ' + name) + '&body=' + encodeURIComponent(body);
-    });
+  const contactStatus = document.getElementById('contactFormStatus');
+  const contactSubmit = document.getElementById('contactSubmit');
+
+  function setContactStatus(message, type) {
+    if (!contactStatus) return;
+    contactStatus.textContent = message;
+    contactStatus.className = 'form-status' + (type ? ' is-' + type : '');
   }
 
+  if (contactForm) {
+    contactForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      setContactStatus('', '');
+
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        setContactStatus('Please check the highlighted fields and try again.', 'error');
+        return;
+      }
+
+      if (FORMSPREE_FORM_ID === 'YOUR_FORMSPREE_FORM_ID' || !FORMSPREE_FORM_ID.trim()) {
+        setContactStatus('The contact form is not connected yet. The site owner needs to add the Formspree form ID in script.js.', 'error');
+        return;
+      }
+
+      const originalButtonContent = contactSubmit?.innerHTML;
+      if (contactSubmit) {
+        contactSubmit.disabled = true;
+        contactSubmit.setAttribute('aria-busy', 'true');
+        contactSubmit.textContent = 'Sending…';
+      }
+      contactForm.setAttribute('aria-busy', 'true');
+      setContactStatus('Sending your message securely…', 'loading');
+
+      try {
+        const formData = new FormData(contactForm);
+        formData.append('_subject', '[Hyterion portfolio] ' + (formData.get('topic') || 'New inquiry'));
+
+        const response = await fetch('https://formspree.io/f/' + encodeURIComponent(FORMSPREE_FORM_ID), {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' }
+        });
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          const details = Array.isArray(result.errors)
+            ? result.errors.map(item => item.message).filter(Boolean).join(' ')
+            : '';
+          if (response.status === 429) {
+            throw new Error('Too many submissions were sent recently. Please wait a moment and try again.');
+          }
+          throw new Error(details || 'We could not send your message. Please check your details and try again.');
+        }
+
+        contactForm.reset();
+        setContactStatus('Message sent successfully. Thanks for reaching out — I’ll reply to your email as soon as I can.', 'success');
+      } catch (error) {
+        setContactStatus(error instanceof TypeError
+          ? 'Could not connect to the email service. Check your internet connection and try again.'
+          : (error.message || 'Something went wrong. Please try again.'), 'error');
+      } finally {
+        contactForm.removeAttribute('aria-busy');
+        if (contactSubmit) {
+          contactSubmit.disabled = false;
+          contactSubmit.removeAttribute('aria-busy');
+          contactSubmit.innerHTML = originalButtonContent || 'Send message';
+        }
+      }
+    });
+  }
 
   // Manual support flow: selection only prepares a contact request; no payment is processed here.
   const supportSelection = document.getElementById('supportSelection');

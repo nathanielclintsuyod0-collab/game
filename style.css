@@ -43,3 +43,31 @@
 .service-grid article p{flex:1}
 .service-grid article a{margin-top:14px}
 @media(max-width:700px){.monetization-grid{grid-template-columns:1fr}.money-card{padding:21px}.sponsor-art{height:140px}}
+
+
+/* Service pricing — lively, accessible cards with clear starting rates */
+.services-section .section-heading{margin-bottom:34px}
+.service-grid-pricing{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;border:0}
+.service-grid-pricing .service-card{position:relative;isolation:isolate;overflow:hidden;min-height:310px;padding:22px;border:1px solid #302a39;border-radius:6px;background:linear-gradient(145deg,#15141b 0%,#101015 62%,#0d0c11 100%);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.service-grid-pricing .service-card::before{content:"";position:absolute;z-index:-1;inset:0;opacity:0;background:radial-gradient(ellipse at 100% 0%,#b48bcf27,transparent 52%);transition:opacity .25s ease}
+.service-grid-pricing .service-card::after{content:"";position:absolute;top:0;left:18px;right:18px;height:1px;background:linear-gradient(90deg,transparent,#b48bcf88,transparent);opacity:.5}
+.service-grid-pricing .service-card:hover{transform:translateY(-5px);border-color:#705985;box-shadow:0 18px 44px #0005,0 0 0 1px #b48bcf0b}
+.service-grid-pricing .service-card:hover::before{opacity:1}
+.service-grid-pricing .service-card-featured{border-color:#655075;background:linear-gradient(145deg,#20172a 0%,#121017 70%)}
+.service-card-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.service-card-top>span:first-child{font:8px var(--mono);letter-spacing:.055em;color:var(--purple)}
+.service-mark{display:grid;place-items:center;width:30px;height:30px;flex:0 0 30px;border:1px solid #b48bcf3b;border-radius:7px;background:#b48bcf0d;color:var(--lilac);font-size:16px}
+.service-grid-pricing .service-card h3{font-size:17px;line-height:1.35;letter-spacing:-.045em;margin:20px 0 9px}
+.service-grid-pricing .service-card p{font-size:11px;line-height:1.85;color:var(--muted);margin:0 0 19px;flex:1}
+.service-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px 9px;padding:14px 0 15px;margin-top:auto;border-top:1px solid #ffffff12}
+.service-price>span{width:100%;font:8px var(--mono);letter-spacing:.09em;color:var(--dim)}
+.service-price strong{font-size:27px;line-height:1.2;letter-spacing:-.065em;color:var(--lilac);font-weight:700}
+.service-price small{font-size:9px;color:var(--muted)}
+.service-grid-pricing .service-card>a{display:flex;align-items:center;justify-content:space-between;width:100%;margin-top:0;padding:10px 11px;border:1px solid #403647;border-radius:4px;background:#ffffff03;font-size:10px;transition:background .2s,border-color .2s,color .2s}
+.service-grid-pricing .service-card>a span{color:var(--purple);font-size:15px;transition:transform .2s}
+.service-grid-pricing .service-card>a:hover{border-color:#a785c1;background:#b48bcf13;color:var(--lilac)}
+.service-grid-pricing .service-card>a:hover span{transform:translate(2px,-2px)}
+.pricing-note{line-height:1.9;max-width:900px}
+@media(max-width:1000px){.service-grid-pricing{grid-template-columns:repeat(2,minmax(0,1fr))}.service-grid-pricing .service-card{min-height:290px}}
+@media(max-width:700px){.service-grid-pricing{grid-template-columns:1fr;gap:10px}.service-grid-pricing .service-card{min-height:0;padding:21px}.service-grid-pricing .service-card h3{margin-top:15px}.service-price strong{font-size:25px}}
+@media(prefers-reduced-motion:reduce){.service-grid-pricing .service-card,.service-grid-pricing .service-card::before,.service-grid-pricing .service-card>a,.service-grid-pricing .service-card>a span{transition:none}}

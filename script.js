@@ -68,6 +68,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (message) message.value = 'I would like to discuss a clearly disclosed sponsorship or advertising partnership. Here is my idea: ';
   });
 
+
+  // Service cards prefill the inquiry form with the selected service and its starting price.
+  document.querySelectorAll('[data-service]').forEach(link => {
+    link.addEventListener('click', () => {
+      const topic = document.getElementById('topic');
+      const message = document.getElementById('message');
+      const service = link.dataset.service || 'Project inquiry';
+      const startingPrice = link.dataset.servicePrice || 'custom quote';
+      if (topic) {
+        const option = Array.from(topic.options).find(item => item.value === service || item.textContent.trim() === service);
+        if (option) topic.value = option.value;
+      }
+      if (message) message.value = 'Hi Neo! I am interested in ' + service + '. I saw the listed starting price of ' + startingPrice + '. My requirements are: ';
+    });
+  });
+
   const revealItems = document.querySelectorAll('.section-label, .intro-grid, .principle-row article, .expertise-item, .project-card, .service-grid article, .contact-layout');
   if (reduceMotion || !('IntersectionObserver' in window)) {
     revealItems.forEach(el => el.classList.add('is-visible'));

@@ -38,3 +38,15 @@ Replace \`YOUR_EMAIL@example.com\` in \`script.js\` with the contact email you w
 - For manual GCash transactions, share payment details privately after discussing the request; verify the transfer in your own GCash account before confirming support or starting paid work. Do not collect OTPs, PINs, or passwords.
 - For automated ads later, apply to a suitable ad provider and follow its approval, consent, and disclosure requirements. Keep ad scripts disabled until approved.
 - This work is committed only to `redesign/neo-ai-portfolio`; do not merge PR #1 or change GitHub Pages production settings without explicit approval.
+
+
+### Service pricing (feature branch preview)
+The Services section displays these introductory starting estimates in PHP:
+- Minecraft Server Setup — ₱500 per setup
+- Custom Skript Development — ₱150 per small script
+- Fixes and Debugging — ₱100 per small fix
+- Maintenance — ₱500 per month
+- Web Development — ₱800 per landing page
+- Discord Bot Development — ₱500 per basic bot feature
+
+These are example starting prices, not guaranteed fixed quotes. Confirm the scope, delivery, included revisions, third-party costs, and payment terms with the client before accepting work. The service cards animate on hover and prefill the contact form; the form still requires a real recipient email in `script.js` to be configured before it can be used.

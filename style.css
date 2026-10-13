@@ -17,3 +17,29 @@
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
 .reveal.is-visible{opacity:1;transform:translateY(0)}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+
+/* Monetization: services, optional manual GCash support, and disclosed sponsor inquiries */
+.monetization-section{border-top:1px solid var(--line-soft)}
+.monetization-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:34px}
+.money-card{min-width:0;position:relative;overflow:hidden;padding:27px;background:linear-gradient(145deg,#15141b,#0e0e13);border:1px solid #302a39;border-radius:7px}
+.money-kicker{font:9px var(--mono);letter-spacing:.09em;color:var(--purple)}
+.money-symbol{display:grid;place-items:center;width:46px;height:46px;margin:24px 0 17px;border:1px solid #b48bcf55;border-radius:12px;background:#b48bcf12;color:var(--lilac);font-size:24px}
+.money-card h3{font-size:22px;letter-spacing:-.05em;margin-bottom:10px}
+.money-card>p{font-size:12px;line-height:1.85;color:var(--muted);max-width:490px}
+.support-amounts{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 6px}
+.support-amounts button{border:1px solid var(--line);border-radius:4px;padding:9px 14px;background:#ffffff04;color:var(--text);font:11px var(--mono);cursor:pointer}
+.support-amounts button:hover,.support-amounts button[aria-pressed="true"]{border-color:var(--purple);background:#b48bcf18;color:var(--lilac)}
+.money-card .support-selection{font:9px var(--mono);color:var(--dim);margin:10px 0 18px}
+.money-cta{margin:0 0 16px}
+.money-footnote{display:block;color:var(--dim);font:9px/1.8 var(--mono);letter-spacing:.01em}
+.sponsor-art{height:155px;margin:22px 0 20px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;border:1px solid #b48bcf30;background:radial-gradient(ellipse at 80% 15%,#b48bcf22,transparent 50%),linear-gradient(135deg,#19151f,#101015)}
+.sponsor-art>span{font:8px var(--mono);letter-spacing:.12em;color:var(--purple)}
+.sponsor-art strong{font-size:25px;line-height:1.08;letter-spacing:-.06em;z-index:1}
+.sponsor-art em{font-family:var(--serif);font-weight:400;color:var(--lilac)}
+.sponsor-art i{position:absolute;right:18px;bottom:9px;color:#b48bcf35;font-size:100px;font-style:normal}
+.money-disclaimer{margin-top:20px}
+.service-grid article{display:flex;flex-direction:column;align-items:flex-start}
+.service-grid article p{flex:1}
+.service-grid article a{margin-top:14px}
+@media(max-width:700px){.monetization-grid{grid-template-columns:1fr}.money-card{padding:21px}.sponsor-art{height:140px}}

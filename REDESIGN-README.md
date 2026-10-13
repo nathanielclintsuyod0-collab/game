@@ -28,3 +28,13 @@ Replace \`YOUR_EMAIL@example.com\` in \`script.js\` with the contact email you w
 - Add request rate limiting / abuse protection before advertising the public AI endpoint. CORS is not authentication and cannot prevent direct API requests.
 - Use a separate, tightly budgeted OpenAI project/key for the portfolio if possible and monitor usage.
 - Merge PR #1 only after review. This branch does not update the live site by itself.
+
+
+## Monetization preview (manual, not live payments)
+- The Services section is positioned for custom project inquiries and quote-first work; no prices or delivery guarantees are invented.
+- The Support section lets visitors select a suggested amount (₱50, ₱100, ₱250, or custom) and pre-fills the contact form to request current GCash instructions. It does not accept payments, collect financial credentials, or verify transfers.
+- The partnership card offers directly negotiated, clearly disclosed sponsored placements. No third-party ad network or tracking code is enabled.
+- Before launch, replace `YOUR_EMAIL@example.com` in `script.js` with a contact email you control. The contact form uses the visitor's email app and will not work until this is configured.
+- For manual GCash transactions, share payment details privately after discussing the request; verify the transfer in your own GCash account before confirming support or starting paid work. Do not collect OTPs, PINs, or passwords.
+- For automated ads later, apply to a suitable ad provider and follow its approval, consent, and disclosure requirements. Keep ad scripts disabled until approved.
+- This work is committed only to `redesign/neo-ai-portfolio`; do not merge PR #1 or change GitHub Pages production settings without explicit approval.

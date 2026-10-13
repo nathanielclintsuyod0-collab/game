@@ -132,3 +132,14 @@ button,input,textarea,select{max-width:100%;box-sizing:border-box}
   .hero-actions{align-items:flex-start}
 }
 @media(max-width:390px){.site-shell{padding-inline:16px}}
+
+
+/* Contact form submission feedback */
+.form-status{display:none;margin:14px 0 0;padding:11px 12px;border:1px solid var(--line);border-radius:4px;font-size:11px;line-height:1.7;overflow-wrap:anywhere}
+.form-status:not(:empty){display:block}
+.form-status.is-loading{display:block;border-color:#554365;color:var(--lilac);background:#b48bcf0b}
+.form-status.is-success{display:block;border-color:#426d55;color:#bde9cc;background:#a7e2be0b}
+.form-status.is-error{display:block;border-color:#754650;color:#f0c6ce;background:#e76e7e0b}
+#contactSubmit:disabled{opacity:.65;cursor:wait;transform:none}
+#contactForm[aria-busy="true"]{border-color:#554365}
+#contactForm input:invalid:not(:placeholder-shown),#contactForm textarea:invalid:not(:placeholder-shown){border-color:#754650}

@@ -71,3 +71,14 @@
 @media(max-width:1000px){.service-grid-pricing{grid-template-columns:repeat(2,minmax(0,1fr))}.service-grid-pricing .service-card{min-height:290px}}
 @media(max-width:700px){.service-grid-pricing{grid-template-columns:1fr;gap:10px}.service-grid-pricing .service-card{min-height:0;padding:21px}.service-grid-pricing .service-card h3{margin-top:15px}.service-price strong{font-size:25px}}
 @media(prefers-reduced-motion:reduce){.service-grid-pricing .service-card,.service-grid-pricing .service-card::before,.service-grid-pricing .service-card>a,.service-grid-pricing .service-card>a span{transition:none}}
+
+/* Premium interaction polish */
+.nav a{position:relative;transition:color .2s ease}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:1px;background:var(--purple);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+.nav a:hover::after,.nav a[aria-current="location"]::after{transform:scaleX(1)}
+.nav a[aria-current="location"]{color:var(--lilac)}
+button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--lilac);outline-offset:3px}
+img{max-width:100%;height:auto}
+@media(max-width:700px){.nav a::after{bottom:0}.service-grid-pricing .service-card-featured{grid-row:auto}}
+@media(prefers-reduced-motion:reduce){.nav a,.nav a::after{transition:none}}

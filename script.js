@@ -53,8 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = get('email');
       const topic = get('topic');
       const message = get('message');
-      const recipient = 'YOUR_EMAIL@example.com';
-      if (recipient === 'YOUR_EMAIL@example.com') {
+      const recipient = 'neowawww@gmail.com';
+      if (!recipient || recipient === 'YOUR_EMAIL@example.com') {
         alert('The contact form is ready, but the owner needs to set a real contact email in script.js before publishing.');
         return;
       }

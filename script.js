@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Direct contact form submission via Formspree (no mail app required).
   // Replace this public form ID with the ID shown in your Formspree dashboard.
-  const FORMSPREE_FORM_ID = 'YOUR_FORMSPREE_FORM_ID';
+  const FORMSPREE_FORM_ID = 'xkjovdzy';
   const contactForm = document.querySelector('#contactForm');
   const contactStatus = document.getElementById('contactFormStatus');
   const contactSubmit = document.getElementById('contactSubmit');

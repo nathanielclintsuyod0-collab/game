@@ -41,12 +41,16 @@ Replace \`YOUR_EMAIL@example.com\` in \`script.js\` with the contact email you w
 
 
 ### Service pricing (feature branch preview)
-The Services section displays these introductory starting estimates in PHP:
-- Minecraft Server Setup — ₱500 per setup
-- Custom Skript Development — ₱150 per small script
-- Fixes and Debugging — ₱100 per small fix
-- Maintenance — ₱500 per month
-- Web Development — ₱800 per landing page
-- Discord Bot Development — ₱500 per basic bot feature
 
-These are example starting prices, not guaranteed fixed quotes. Confirm the scope, delivery, included revisions, third-party costs, and payment terms with the client before accepting work. The service cards animate on hover and prefill the contact form; the form still requires a real recipient email in `script.js` to be configured before it can be used.
+The Services section currently presents these indicative prices in Philippine pesos:
+- Server Optimization — ₱400–₱1,500 per project
+- Custom Skript Development — Small (1–100 lines): ₱150–₱500; Medium (101–300): ₱500–₱1,200; Large (301–700): ₱1,200–₱2,500; Advanced (701+): custom quote
+- Minecraft Server Setup — ₱2,500–₱4,500 per setup
+- Bug Fixes & Debugging — ₱300–₱1,500 per issue
+- Server Maintenance — ₱800–₱2,500 per month
+- Web Development — ₱800–₱3,500+ per website
+- Discord Bot Development — ₱500–₱3,000+ based on feature scope
+
+These are indicative ranges, not fixed offers. Line count is only a guideline; integrations, complexity, testing, urgency, and support may change a quote. Hosting, paid plugins, domains, and third-party costs are excluded unless agreed. The Skript card is highlighted as the specialty service and contains inline SVG icons and a responsive tier list. Navigation highlights the current section and can be closed with Escape. Keyboard focus styles and reduced-motion support are included.
+
+The contact form still requires a real recipient email in `script.js` before it can be used. Browser visual testing and live deployment have not been performed.

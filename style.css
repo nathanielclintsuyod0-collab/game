@@ -112,3 +112,23 @@ img{max-width:100%;height:auto}
 @media(max-width:700px){.service-grid-pricing{grid-template-columns:1fr}.service-grid-pricing .service-card,.service-grid-pricing .service-card-featured{grid-row:auto;min-height:0;padding:20px}.skript-tiers span{font-size:10px}.skript-tiers strong{font-size:11px}.service-price strong{font-size:25px}.pricing-footnote{padding:13px}}
 @media(hover:none){.service-grid-pricing .service-card:hover{transform:none;box-shadow:none}}
 @media(prefers-reduced-motion:reduce){.service-grid-pricing .service-card,.service-grid-pricing .service-card::before,.service-grid-pricing .service-card>a,.service-grid-pricing .service-card>a span{transition:none}}
+
+
+/* Layout safety overrides: keep the portfolio centered and components proportional */
+html{width:100%;overflow-x:hidden}
+body{width:100%;min-width:320px}
+.site-shell{width:100%;max-width:1440px;margin-inline:auto}
+.site-shell main,.site-shell header,.site-shell footer{min-width:0}
+img,svg,video,canvas{max-width:100%}
+button,input,textarea,select{max-width:100%;box-sizing:border-box}
+.hero,.intro-grid,.section-heading,.contact-layout{min-width:0}
+.hero>* ,.intro-grid>* ,.section-heading>* ,.contact-layout>*{min-width:0}
+.button,.nav-cta,.ai-launcher{width:auto;max-width:100%}
+.service-grid-pricing .service-card{min-width:0}
+@media(max-width:700px){
+  .site-shell{width:100%;padding-inline:22px}
+  .hero,.intro-grid,.section-heading,.contact-layout{grid-template-columns:minmax(0,1fr)}
+  .project-grid,.service-grid-pricing,.monetization-grid{grid-template-columns:minmax(0,1fr)}
+  .hero-actions{align-items:flex-start}
+}
+@media(max-width:390px){.site-shell{padding-inline:16px}}

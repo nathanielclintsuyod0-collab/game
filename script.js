@@ -1,5 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Lightweight interactive starfield with a soft purple nebula; respects reduced-motion.
+  const cosmicCanvas = document.getElementById('cosmic-background');
+  if (cosmicCanvas) {
+    const ctx = cosmicCanvas.getContext('2d', { alpha: true });
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let stars = [], width = 0, height = 0, raf = 0, pointerX = 0, pointerY = 0;
+    const makeStars = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth; height = window.innerHeight;
+      cosmicCanvas.width = Math.floor(width * dpr); cosmicCanvas.height = Math.floor(height * dpr);
+      cosmicCanvas.style.width = width + 'px'; cosmicCanvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.min(150, Math.floor(width * height / 9500));
+      stars = Array.from({length: count}, () => ({x:Math.random()*width,y:Math.random()*height,r:Math.random()*1.35+.25,a:Math.random()*.55+.15,p:Math.random()*Math.PI*2,s:Math.random()*.006+.002}));
+    };
+    const drawStars = (time=0) => {
+      ctx.clearRect(0,0,width,height);
+      for (const star of stars) {
+        const twinkle = motionQuery.matches ? 1 : .72 + Math.sin(time*star.s+star.p)*.28;
+        const x = star.x + (motionQuery.matches ? 0 : pointerX*.012);
+        const y = star.y + (motionQuery.matches ? 0 : pointerY*.012);
+        ctx.beginPath(); ctx.arc(x,y,star.r,0,Math.PI*2);
+        ctx.fillStyle = 'rgba(222,202,255,'+(star.a*twinkle)+')'; ctx.fill();
+      }
+      if (!motionQuery.matches) raf = requestAnimationFrame(drawStars);
+    };
+    makeStars(); drawStars();
+    window.addEventListener('resize', () => { cancelAnimationFrame(raf); makeStars(); drawStars(); }, {passive:true});
+    window.addEventListener('pointermove', e => { pointerX=(e.clientX/Math.max(width,1)-.5)*2; pointerY=(e.clientY/Math.max(height,1)-.5)*2; }, {passive:true});
+    motionQuery.addEventListener?.('change', () => { cancelAnimationFrame(raf); drawStars(); });
+  }
   const menu = document.querySelector('.menu');
   const nav = document.querySelector('.nav');
 

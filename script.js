@@ -1,5 +1,67 @@
 document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Lightweight animated starfield; capped for performance and disabled for reduced motion.
+  const cosmicCanvas = document.getElementById('cosmic-background');
+  const cosmicContext = cosmicCanvas?.getContext('2d', { alpha: true });
+  if (cosmicCanvas && cosmicContext) {
+    let cosmicWidth = 0;
+    let cosmicHeight = 0;
+    let cosmicStars = [];
+    let cosmicFrame = 0;
+    let cosmicPointerX = 0;
+    let cosmicPointerY = 0;
+    const cosmicDpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const cosmicCount = Math.min(150, Math.max(65, Math.floor((window.innerWidth * window.innerHeight) / 14000)));
+
+    const resizeCosmic = () => {
+      cosmicWidth = window.innerWidth;
+      cosmicHeight = window.innerHeight;
+      cosmicCanvas.width = Math.floor(cosmicWidth * cosmicDpr);
+      cosmicCanvas.height = Math.floor(cosmicHeight * cosmicDpr);
+      cosmicContext.setTransform(cosmicDpr, 0, 0, cosmicDpr, 0, 0);
+      cosmicStars = Array.from({ length: cosmicCount }, () => ({
+        x: Math.random() * cosmicWidth,
+        y: Math.random() * cosmicHeight,
+        radius: Math.random() * 1.25 + 0.25,
+        phase: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.018 + 0.004,
+        drift: Math.random() * 0.16 + 0.02
+      }));
+    };
+    const drawCosmic = () => {
+      cosmicContext.clearRect(0, 0, cosmicWidth, cosmicHeight);
+      cosmicStars.forEach(star => {
+        star.phase += star.speed;
+        const alpha = 0.2 + (Math.sin(star.phase) + 1) * 0.28;
+        const parallaxX = reduceMotion ? 0 : cosmicPointerX * star.drift;
+        const parallaxY = reduceMotion ? 0 : cosmicPointerY * star.drift;
+        cosmicContext.beginPath();
+        cosmicContext.arc(star.x + parallaxX, star.y + parallaxY, star.radius, 0, Math.PI * 2);
+        cosmicContext.fillStyle = `rgba(227, 211, 244, ${alpha})`;
+        cosmicContext.fill();
+      });
+      if (!reduceMotion) cosmicFrame = window.requestAnimationFrame(drawCosmic);
+    };
+    resizeCosmic();
+    drawCosmic();
+    window.addEventListener('resize', resizeCosmic, { passive: true });
+    if (!reduceMotion) {
+      window.addEventListener('pointermove', event => {
+        cosmicPointerX = (event.clientX / Math.max(window.innerWidth, 1) - 0.5) * 12;
+        cosmicPointerY = (event.clientY / Math.max(window.innerHeight, 1) - 0.5) * 12;
+      }, { passive: true });
+    }
+    if (reduceMotion) {
+      cosmicContext.clearRect(0, 0, cosmicWidth, cosmicHeight);
+      cosmicStars.forEach(star => {
+        cosmicContext.beginPath();
+        cosmicContext.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        cosmicContext.fillStyle = 'rgba(227, 211, 244, 0.42)';
+        cosmicContext.fill();
+      });
+    }
+  }
   const menu = document.querySelector('.menu');
   const nav = document.querySelector('.nav');
 
